@@ -1,0 +1,118 @@
+public class PrimeiraClasse {}
+public static void main(String[] args) {
+     }
+System.out.println("Olá, mundo!");
+public class PrimeiraClasse {
+       public static void main(String[] args) {
+          System.out.println("Olá, mundo!");
+        }
+          }
+
+
+public class Pessoa {
+            private String primeiroNome;
+            private String ultimoNome;
+            private String nomesDoMeio;
+       }
+public String getNomeCompleto() {
+
+            String nomeCompleto = primeiroNome + " " + nomesDoMeio + " " + ultimoNome;
+            return nomeCompleto;
+       }
+
+
+public class ProgramaNome {
+            public static void main(String[] args) {
+
+            }
+       }
+Pessoa pessoa = new Pessoa();
+
+
+public class ProgramaNome {
+            public static void main(String[] args) {
+                 Pessoa pessoa = new Pessoa();
+                 pessoa.primeiroNome = “João”;
+                 pessoa.nomeDoMeio = “Paulo”;
+                 pessoa.ultimoNome = “Silva”;
+                 System.out.println(pessoa.getNomeCompleto());
+            }
+       }
+public Pessoa(String primeiro, String meio, String ultimo) {
+
+            primeiroNome = primeiro;
+            ultimoNome = ultimo;
+            nomesDoMeio = meio;
+       }
+Pessoa pessoa = new Pessoa("João", "Paulo", "Silva");
+João Paulo Silva
+
+
+public class Pessoa {
+          private String primeiroNome;
+          private String ultimoNome;
+          private String nomesDoMeio;
+
+
+          public Pessoa(String primeiro, String meio, String ultimo) {
+            primeiroNome = primeiro;
+            ultimoNome = ultimo;
+            nomesDoMeio = meio;
+          }
+
+
+          public String getNomeCompleto() {
+            String nomeCompleto = primeiroNome + " " + nomesDoMeio + " " + ultimoNome;
+            return nomeCompleto;
+          }
+
+       }
+
+
+public class ProgramaNome {
+
+          public static void main(String[] args) {
+            Pessoa pessoa = new Pessoa("João", "Paulo", "Silva");
+            System.out.println(pessoa.getNomeCompleto());
+          }
+
+       }
+
+
+public class Animal {
+            public void comer(String alimento) {
+                 System.out.println("Eu estou comendo "+alimento);
+            }
+       }
+
+
+public class Mamifero extends Animal {
+       }
+public String lactar() {
+            return "leite";
+       }
+Eu estou comendo plantas
+
+       Eu estou comendo queijo
+       O produto da lactação é leite
+
+
+public class Mamifero extends Animal {
+
+          public String lactar() {
+            return "leite";
+          }
+
+       }
+
+
+public class AnimaisAgindo {
+       public static void main(String[] args) {
+        Animal animal = new Animal();
+        Mamifero mamifero = new Mamifero();
+        animal.comer("plantas");
+        mamifero.comer("queijo");
+        String produto = mamifero.lactar();
+        System.out.println("O produto da lactação é " + produto);
+       }
+     }

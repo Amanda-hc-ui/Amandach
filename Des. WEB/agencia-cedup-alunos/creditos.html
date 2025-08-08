@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Agência de Viagens - Créditos</title>
+<style>
+  /* Reset básico */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'constantia', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0b77dd; /* azul forte */
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    background-color: #002863;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    /* Removido o menu, o header pode ter altura mínima */
+    height: 3rem;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+  }
+
+  nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+    cursor: pointer;
+  }
+
+  nav ul li a:hover,
+  nav ul li a:focus {
+    color: #ffcc00;
+    outline: none;
+  }
+
+  main {
+    flex: 1;
+    max-width: 900px;
+    margin: 2rem auto;
+    background: rgba(255,255,255,0.1);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  h1, h2 {
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  section {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  .creditos p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+  }
+
+  .imagem-viagem {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  }
+
+  .btn-voltar {
+    align-self: flex-start;
+    background-color: #002863; /* azul forte */
+    color: #ffffff;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 1rem;
+    user-select: none;
+  }
+
+  .btn-voltar:hover,
+  .btn-voltar:focus {
+    background-color: #0b77dd;
+    outline: none;
+  }
+
+  footer {
+    background-color: #002863;
+    color: #ffffff;
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <ul>
+      <!-- Menu removido conforme solicitado -->
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <a href="index.html" class="btn-voltar" role="button" aria-label="Voltar para a página inicial">← Voltar para Início</a>
+
+  <h1>Agência de Viagens</h1>
+
+  <section id="creditos" class="creditos">
+    <h2>Créditos</h2>
+    <p>Desenvolvido por: Equipe Agência de Viagens</p>
+    <p>Imagens: Banco de imagens Unsplash e Pixabay</p>
+    <p>Ícones: FontAwesome e Material Icons</p>
+    <p>Fonte utilizada: Segoe UI, Tahoma, Geneva, Verdana, sans-serif</p>
+    <p>Agradecimento especial a todos os nossos parceiros e clientes pela confiança e apoio.</p>
+    <p>Hospedagem e infraestrutura fornecidas por provedores confiáveis para garantir alta disponibilidade e segurança.</p>
+    <p>Conteúdo gerado por especialistas em turismo e viagens para oferecer as melhores experiências.</p>
+    <p>Projeto idealizado para facilitar o planejamento e reservas das suas próximas férias.</p>
+  </section>
+
+  <img src="https://www.viajali.com.br/wp-content/uploads/2016/12/muralha-da-china-lugares-lindos.jpg" alt="Imagem ilustrativa de viagem com mala e passaporte" class="imagem-viagem" />
+
+</main>
+
+<footer>
+  &copy; 2024 Agência de Viagens - Todos os direitos reservados.
+</footer>
+
+</body>
+</html>

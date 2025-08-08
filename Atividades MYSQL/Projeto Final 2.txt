@@ -1,0 +1,46 @@
+mysql> CREATE DATABASE IF NOT EXISTS ClinicaMedica;
+
+mysql> USE ClinicaMedica;
+mysql> CREATE TABLE Pacientes (PacienteID INT AUTO_INCREMENT PRIMARY KEY, NomeCompleto VARCHAR(100) NOT NULL,  CPF CHAR(11) NOT NULL UNIQUE,  DataNascimento DATE NOT NULL,   Telefone VARCHAR(15),  Email VARCHAR(100));
+
+mysql> CREATE TABLE Medicos (MedicoID INT AUTO_INCREMENT PRIMARY KEY, NomeCompleto VARCHAR(100) NOT NULL,  Especialidade VARCHAR(50) NOT NULL,  CRM VARCHAR(20) NOT NULL UNIQUE,  Telefone VARCHAR(15));
+
+mysql> CREATE TABLE Salas ( SalaID INT AUTO_INCREMENT PRIMARY KEY,   NumeroSala VARCHAR(10) NOT NULL UNIQUE,  Tipo VARCHAR(50) NOT NULL);
+
+mysql> CREATE TABLE Consultas (ConsultaID INT AUTO_INCREMENT PRIMARY KEY,  DataConsulta DATE NOT NULL, HoraConsulta TIME NOT NULL,   MedicoID INT NOT NULL,  PacienteID INT NOT NULL,  SalaID INT NOT NULL,  Status ENUM('agendada', 'realizada', 'cancelada') NOT NULL DEFAULT 'agendada',  CONSTRAINT FK_Consultas_Medicos FOREIGN KEY (MedicoID) REFERENCES Medicos(MedicoID),  CONSTRAINT FK_Consultas_Pacientes FOREIGN KEY (PacienteID) REFERENCES Pacientes(PacienteID),   CONSTRAINT FK_Consultas_Salas FOREIGN KEY (SalaID) REFERENCES Salas(SalaID),  CONSTRAINT UQ_Consulta UNIQUE (DataConsulta, HoraConsulta, MedicoID));
+
+mysql> INSERT INTO Pacientes (NomeCompleto, CPF, DataNascimento, Telefone, Email) VALUES ('Ana Silva', '12345678901', '1985-04-12', '11999990000', 'ana.silva@email.com'), ('Bruno Souza', '23456789012', '1990-11-23', '11988881111', 'bruno.souza@email.com'), ('Carla Mendes', '34567890123', '1975-07-05', '11977772222', 'carla.mendes@email.com'), ('Diego Ferreira', '45678901234', '1982-03-14', '11966660000', 'diego.ferreira@email.com'), ('Elisa Rocha', '56789012345', '1995-12-30', '11955551111', 'elisa.rocha@email.com');
+
+mysql> INSERT INTO Medicos (NomeCompleto, Especialidade, CRM, Telefone) VALUES ('Dr. João Pereira', 'Cardiologia', 'CRM1234', '11955553333'), ('Dra. Mariana Alves', 'Dermatologia', 'CRM5678', '11966664444'), ('Dr. Lucas Martins', 'Ortopedia', 'CRM9101', '11977775555'), ('Dra. Paula Mendes', 'Pediatria', 'CRM1122', '11988886666'), ('Dr. Tiago Fernandes', 'Oftalmologia', 'CRM7788', '11922223333');
+
+mysql> INSERT INTO Salas (NumeroSala, Tipo) VALUES ('101', 'Atendimento Geral'), ('102', 'Exame'), ('103', 'Atendimento Geral'), ('104', 'Exame'), ('107', 'Atendimento Geral');
+
+mysql> INSERT INTO Consultas (DataConsulta, HoraConsulta, MedicoID, PacienteID, SalaID, Status) VALUES('2025-07-10', '08:00:00', 1, 1, 1, 'agendada'), ('2025-07-10', '09:00:00', 1, 2, 1, 'realizada'), ('2025-07-11', '10:00:00', 2, 3, 2, 'cancelada'), ('2025-07-12', '11:00:00', 2, 1, 2, 'realizada'), ('2025-07-12', '12:00:00', 1, 1, 1, 'realizada');
+
+mysql> SELECT c.ConsultaID, c.DataConsulta, c.HoraConsulta, p.NomeCompleto AS Paciente, c.Status, s.NumeroSala FROM Consultas c JOIN Medicos m ON c.MedicoID = m.MedicoID JOIN Pacientes p ON c.PacienteID = p.PacienteID JOIN Salas s ON c.SalaID = s.SalaID WHERE m.CRM = 'CRM1234' AND c.Status = 'agendada' ORDER BY c.DataConsulta, c.HoraConsulta;
++------------+--------------+--------------+-----------+----------+------------+
+| ConsultaID | DataConsulta | HoraConsulta | Paciente  | Status   | NumeroSala |
++------------+--------------+--------------+-----------+----------+------------+
+|          1 | 2025-07-10   | 08:00:00     | Ana Silva | agendada | 101        |
++------------+--------------+--------------+-----------+----------+------------+
+
+mysql> WITH HorariosPossiveis AS (  SELECT TIME('08:00:00') AS HoraConsulta UNION ALL  SELECT TIME('09:00:00') UNION ALL  SELECT TIME('10:00:00') UNION ALL  SELECT TIME('11:00:00') UNION ALL  SELECT TIME('12:00:00')) SELECT h.HoraConsulta FROM HorariosPossiveis h LEFT JOIN Consultas c ON c.HoraConsulta = h.HoraConsulta   AND c.DataConsulta = '2025-07-10'  AND c.MedicoID = (SELECT MedicoID FROM Medicos WHERE CRM = 'CRM1234')  AND c.Status = 'agendada' WHERE c.ConsultaID IS NULL ORDER BY h.HoraConsulta;
++--------------+
+| HoraConsulta |
++--------------+
+| 09:00:00     |
+| 10:00:00     |
+| 11:00:00     |
+| 12:00:00     |
++--------------+
+
+mysql> SELECT p.PacienteID, p.NomeCompleto, p.CPF, COUNT(c.ConsultaID) AS TotalConsultas FROM Pacientes p JOIN Consultas c ON p.PacienteID = c.PacienteID WHERE c.Status = 'realizada' GROUP BY p.PacienteID, p.NomeCompleto, p.CPF HAVING COUNT(c.ConsultaID) > 1;
++------------+--------------+-------------+----------------+
+| PacienteID | NomeCompleto | CPF         | TotalConsultas |
++------------+--------------+-------------+----------------+
+|          1 | Ana Silva    | 12345678901 |              2 |
++------------+--------------+-------------+----------------+
+
+mysql> UPDATE Consultas SET Status = 'realizada' WHERE ConsultaID = 1 AND Status = 'agendada';
+
+mysql> DELETE FROM Pacientes WHERE PacienteID = 3 AND PacienteID NOT IN ( SELECT DISTINCT PacienteID FROM Consultas);

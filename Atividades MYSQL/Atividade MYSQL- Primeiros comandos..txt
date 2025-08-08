@@ -1,0 +1,796 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| teste              |
++--------------------+
+
+
+mysql> create database Teste1;
+
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| teste              |
+| teste1             |
++--------------------+
+
+
+mysql> create database virtual1;
+
+
+
+mysql> create table CadFun1 (CODFUN integer not null primary key,  NOME varchar(40) not null, DEPTO char( 2), FUNCAO char(20),  SALARIO decimal(10, 2));
+mysql>  INSERT INTO cadfun1 (CODFUN, NOME, DEPTO, FUNCAO, SALARIO) VALUES (12, 'CARLOS ALBERTO', '3', 'VENDEDOR', 1530.00);
+
+mysql> describe CadFun1;
++---------+---------------+------+-----+---------+-------+
+| Field   | Type          | Null | Key | Default | Extra |
++---------+---------------+------+-----+---------+-------+
+| CODFUN  | int           | NO   | PRI | NULL    |       |
+| NOME    | varchar(40)   | NO   |     | NULL    |       |
+| DEPTO   | char(2)       | YES  |     | NULL    |       |
+| FUNCAO  | char(20)      | YES  |     | NULL    |       |
+| SALARIO | decimal(10,2) | YES  |     | NULL    |       |
++---------+---------------+------+-----+---------+-------+
+
+
+mysql> describe CadFun1 CODFUN;
++--------+------+------+-----+---------+-------+
+| Field  | Type | Null | Key | Default | Extra |
++--------+------+------+-----+---------+-------+
+| CODFUN | int  | NO   | PRI | NULL    |       |
++--------+------+------+-----+---------+-------+
+
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| teste              |
+| teste1             |
+| virtual1           |
++--------------------+
+
+
+mysql> use virtual1;
+
+
+mysql> create table CadFun1 (CODFUN integer not null primary key,  NOME varchar(40) not null, DEPTO char( 2), FUNCAO char(20),  SALARIO decimal(10, 2));
+
+
+ 1
+mysql>  INSERT INTO cadfun1 (CODFUN, NOME, DEPTO, FUNCAO, SALARIO) VALUES (12, 'CARLOS ALBERTO', '3', 'VENDEDOR', 1530.00);
+
+
+mysql> INSERT INTO cadfun1 (CODFUN, NOME, DEPTO, FUNCAO, SALARIO) VALUES (15, 'MARCOS HENRIQUE', '2', 'GERENTE', 1985.75);
+
+
+mysql> INSERT INTO cadfun1 (CODFUN, NOME, DEPTO, FUNCAO, SALARIO) VALUES ( 7, 'APARECIDA SILVA', '3', 'SECRETARIA', 1200.50);
+
+
+
+mysql>  INSERT INTO cadfun1 (CODFUN, NOME, DEPTO, SALARIO) VALUES ( 44, 'JACIBA DA SILVA', '3',  1500.00);
+
+
+mysql> INSERT INTO cadfun1 (CODFUN, NOME, DEPTO, FUNCAO, SALARIO) VALUES (2, 'WILSON DE MACEDO', '3', 'PROGRAMADOR', 1050.00);
+
+
+ 
+mysql> INSERT INTO cadfun1 (CODFUN, NOME, DEPTO, FUNCAO, SALARIO) VALUES ( 5, 'AUGUSTO SOUZA', '3', 'PROGRAMADOR', 1050.00);
+
+
+
+mysql> SELECT NOME, CODFUN FROM cadfun
+    -> WHERE DEPTO = '3';
+
+
+mysql> SELECT NOME, CODFUN FROM cadfun1 WHERE DEPTO = '3';
++------------------+--------+
+| NOME             | CODFUN |
++------------------+--------+
+| WILSON DE MACEDO |      2 |
+| AUGUSTO SOUZA    |      5 |
+| APARECIDA SILVA  |      7 |
+| CARLOS ALBERTO   |     12 |
+| JACIBA DA SILVA  |     44 |
++------------------+--------+
+
+
+mysql> SELECT NOME, SALARIO FROM cadfun1 ORDER BY NOME;
++------------------+---------+
+| NOME             | SALARIO |
++------------------+---------+
+| APARECIDA SILVA  | 1200.50 |
+| AUGUSTO SOUZA    | 1050.00 |
+| CARLOS ALBERTO   | 1530.00 |
+| JACIBA DA SILVA  | 1500.00 |
+| MARCOS HENRIQUE  | 1985.75 |
+| WILSON DE MACEDO | 1050.00 |
++------------------+---------+
+
+
+mysql> SELECT NOME, SALARIO FROM cadfun1 ORDER BY NOME DESC;
++------------------+---------+
+| NOME             | SALARIO |
++------------------+---------+
+| WILSON DE MACEDO | 1050.00 |
+| MARCOS HENRIQUE  | 1985.75 |
+| JACIBA DA SILVA  | 1500.00 |
+| CARLOS ALBERTO   | 1530.00 |
+| AUGUSTO SOUZA    | 1050.00 |
+| APARECIDA SILVA  | 1200.50 |
++------------------+---------+
+
+
+mysql> SELECT NOME, SALARIO FROM cadfun1 ORDER BY NOME DESC;
++------------------+---------+
+| NOME             | SALARIO |
++------------------+---------+
+| WILSON DE MACEDO | 1050.00 |
+| MARCOS HENRIQUE  | 1985.75 |
+| JACIBA DA SILVA  | 1500.00 |
+| CARLOS ALBERTO   | 1530.00 |
+| AUGUSTO SOUZA    | 1050.00 |
+| APARECIDA SILVA  | 1200.50 |
++------------------+---------+
+
+
+mysql> SELECT DEPTO, NOME FROM cadfun1 ORDER BY DEPTO, NOME DESC;
++-------+------------------+
+| DEPTO | NOME             |
++-------+------------------+
+| 2     | MARCOS HENRIQUE  |
+| 3     | WILSON DE MACEDO |
+| 3     | JACIBA DA SILVA  |
+| 3     | CARLOS ALBERTO   |
+| 3     | AUGUSTO SOUZA    |
+| 3     | APARECIDA SILVA  |
++-------+------------------+
+
+
+mysql> SELECT NOME FROM cadfun1 WHERE DEPTO = '3' ORDER BY NOME;
++------------------+
+| NOME             |
++------------------+
+| APARECIDA SILVA  |
+| AUGUSTO SOUZA    |
+| CARLOS ALBERTO   |
+| JACIBA DA SILVA  |
+| WILSON DE MACEDO |
++------------------+
+
+
+mysql> SELECT * FROM cadfun1 WHERE CODFUN = 7;
++--------+-----------------+-------+------------+---------+
+| CODFUN | NOME            | DEPTO | FUNCAO     | SALARIO |
++--------+-----------------+-------+------------+---------+
+|      7 | APARECIDA SILVA | 3     | SECRETARIA | 1200.50 |
++--------+-----------------+-------+------------+---------+
+
+
+mysql> UPDATE cadfun1 SET SALARIO = 2300.56 WHERE CODFUN = 7;
+
+
+mysql> SELECT * FROM cadfun WHERE CODFUN = 7;
+
+
+mysql> SELECT * FROM cadfun1 WHERE NOME = 'ANA BASTOS';
+
+
+mysql> UPDATE cadfun1 SET DEPTO = '3' WHERE NOME = 'ANA BASTOS';
+
+
+mysql> SELECT * FROM cadfun1 WHERE NOME = 'ANA BASTOS';
+
+mysql> SELECT * FROM cadfun1;
++--------+------------------+-------+-------------+---------+
+| CODFUN | NOME             | DEPTO | FUNCAO      | SALARIO |
++--------+------------------+-------+-------------+---------+
+|      2 | WILSON DE MACEDO | 3     | PROGRAMADOR | 1050.00 |
+|      5 | AUGUSTO SOUZA    | 3     | PROGRAMADOR | 1050.00 |
+|      7 | APARECIDA SILVA  | 3     | SECRETARIA  | 2300.56 |
+|     12 | CARLOS ALBERTO   | 3     | VENDEDOR    | 1530.00 |
+|     15 | MARCOS HENRIQUE  | 2     | GERENTE     | 1985.75 |
+|     44 | JACIBA DA SILVA  | 3     | NULL        | 1500.00 |
++--------+------------------+-------+-------------+---------+
+
+
+mysql> UPDATE cadfun1 SET SALARIO = SALARIO * 1.10;
+
+
+mysql> SELECT * FROM cadfun1;
++--------+------------------+-------+-------------+---------+
+| CODFUN | NOME             | DEPTO | FUNCAO      | SALARIO |
++--------+------------------+-------+-------------+---------+
+|      2 | WILSON DE MACEDO | 3     | PROGRAMADOR | 1155.00 |
+|      5 | AUGUSTO SOUZA    | 3     | PROGRAMADOR | 1155.00 |
+|      7 | APARECIDA SILVA  | 3     | SECRETARIA  | 2530.62 |
+|     12 | CARLOS ALBERTO   | 3     | VENDEDOR    | 1683.00 |
+|     15 | MARCOS HENRIQUE  | 2     | GERENTE     | 2184.33 |
+|     44 | JACIBA DA SILVA  | 3     | NULL        | 1650.00 |
++--------+------------------+-------+-------------+---------+
+
+
+mysql> SELECT * FROM cadfun1;
++--------+------------------+-------+-------------+---------+
+| CODFUN | NOME             | DEPTO | FUNCAO      | SALARIO |
++--------+------------------+-------+-------------+---------+
+|      2 | WILSON DE MACEDO | 3     | PROGRAMADOR | 1155.00 |
+|      5 | AUGUSTO SOUZA    | 3     | PROGRAMADOR | 1155.00 |
+|      7 | APARECIDA SILVA  | 3     | SECRETARIA  | 2530.62 |
+|     12 | CARLOS ALBERTO   | 3     | VENDEDOR    | 1683.00 |
+|     15 | MARCOS HENRIQUE  | 2     | GERENTE     | 2184.33 |
+|     44 | JACIBA DA SILVA  | 3     | NULL        | 1650.00 |
++--------+------------------+-------+-------------+---------+
+
+
+mysql> SELECT DISTINCT DEPTO FROM cadfun1;
++-------+
+| DEPTO |
++-------+
+| 3     |
+| 2     |
++-------+
+
+
+mysql> DELETE FROM cadfun1 WHERE DEPTO = '2';
+
+
+mysql> SELECT * FROM cadfun1;
++--------+------------------+-------+-------------+---------+
+| CODFUN | NOME             | DEPTO | FUNCAO      | SALARIO |
++--------+------------------+-------+-------------+---------+
+|      2 | WILSON DE MACEDO | 3     | PROGRAMADOR | 1155.00 |
+|      5 | AUGUSTO SOUZA    | 3     | PROGRAMADOR | 1155.00 |
+|      7 | APARECIDA SILVA  | 3     | SECRETARIA  | 2530.62 |
+|     12 | CARLOS ALBERTO   | 3     | VENDEDOR    | 1683.00 |
+|     44 | JACIBA DA SILVA  | 3     | NULL        | 1650.00 |
++--------+------------------+-------+-------------+---------+
+
+
+mysql> SELECT DISTINCT DEPTO FROM cadfun1;
++-------+
+| DEPTO |
++-------+
+| 3     |
++-------+
+
+
+mysql> DELETE FROM cadfun1 WHERE NOME = 'MARCELO SOUZA';
+
+
+mysql> SELECT * FROM cadfun1;
++--------+------------------+-------+-------------+---------+
+| CODFUN | NOME             | DEPTO | FUNCAO      | SALARIO |
++--------+------------------+-------+-------------+---------+
+|      2 | WILSON DE MACEDO | 3     | PROGRAMADOR | 1155.00 |
+|      5 | AUGUSTO SOUZA    | 3     | PROGRAMADOR | 1155.00 |
+|      7 | APARECIDA SILVA  | 3     | SECRETARIA  | 2530.62 |
+|     12 | CARLOS ALBERTO   | 3     | VENDEDOR    | 1683.00 |
+|     44 | JACIBA DA SILVA  | 3     | NULL        | 1650.00 |
++--------+------------------+-------+-------------+---------+
+
+
+mysql> ALTER TABLE cadfun1 ADD ADMISSAO DATE;
+
+
+mysql> SELECT * FROM cadfun1;
++--------+------------------+-------+-------------+---------+----------+
+| CODFUN | NOME             | DEPTO | FUNCAO      | SALARIO | ADMISSAO |
++--------+------------------+-------+-------------+---------+----------+
+|      2 | WILSON DE MACEDO | 3     | PROGRAMADOR | 1155.00 | NULL     |
+|      5 | AUGUSTO SOUZA    | 3     | PROGRAMADOR | 1155.00 | NULL     |
+|      7 | APARECIDA SILVA  | 3     | SECRETARIA  | 2530.62 | NULL     |
+|     12 | CARLOS ALBERTO   | 3     | VENDEDOR    | 1683.00 | NULL     |
+|     44 | JACIBA DA SILVA  | 3     | NULL        | 1650.00 | NULL     |
++--------+------------------+-------+-------------+---------+----------+
+
+
+mysql> UPDATE cadfun1 SET ADMISSAO = '2006-01-15' WHERE CODFUN = 2;
+
+
+mysql> UPDATE cadfun1 SET ADMISSAO = '1999-10-21' WHERE CODFUN = 3;
+
+
+mysql> UPDATE cadfun1 SET ADMISSAO = '2004-10-21' WHERE CODFUN = 4;
+
+
+mysql> UPDATE cadfun1 SET ADMISSAO = '2006-04-26' WHERE CODFUN = 5;
+
+
+mysql> UPDATE cadfun1 SET ADMISSAO = '1980-05-10' WHERE CODFUN = 7;
+
+
+mysql> UPDATE cadfun1 SET ADMISSAO = '1999-12-15' WHERE CODFUN = 9;
+
+
+mysql> UPDATE cadfun1 SET ADMISSAO = '2000-12-21' WHERE CODFUN = 12;
+
+
+mysql> UPDATE cadfun1 SET ADMISSAO = '2000-10-21' WHERE CODFUN = 25;
+
+
+mysql> SELECT * FROM cadfun1;
++--------+------------------+-------+-------------+---------+------------+
+| CODFUN | NOME             | DEPTO | FUNCAO      | SALARIO | ADMISSAO   |
++--------+------------------+-------+-------------+---------+------------+
+|      2 | WILSON DE MACEDO | 3     | PROGRAMADOR | 1155.00 | 2006-01-15 |
+|      5 | AUGUSTO SOUZA    | 3     | PROGRAMADOR | 1155.00 | 2006-04-26 |
+|      7 | APARECIDA SILVA  | 3     | SECRETARIA  | 2530.62 | 1980-05-10 |
+|     12 | CARLOS ALBERTO   | 3     | VENDEDOR    | 1683.00 | 2000-12-21 |
+|     44 | JACIBA DA SILVA  | 3     | NULL        | 1650.00 | NULL       |
++--------+------------------+-------+-------------+---------+------------+
+
+
+mysql> SELECT NOME, ADMISSAO FROM cadfun1 WHERE MONTH(ADMISSAO) = 12;
++----------------+------------+
+| NOME           | ADMISSAO   |
++----------------+------------+
+| CARLOS ALBERTO | 2000-12-21 |
++----------------+------------+
+
+
+mysql> SELECT NOME, ADMISSAO FROM cadfun1 WHERE ADMISSAO >= '2000-01-01';
++------------------+------------+
+| NOME             | ADMISSAO   |
++------------------+------------+
+| WILSON DE MACEDO | 2006-01-15 |
+| AUGUSTO SOUZA    | 2006-04-26 |
+| CARLOS ALBERTO   | 2000-12-21 |
++------------------+------------+
+
+
+mysql> INSERT INTO cadfun1 VALUES (15, 'MARCOS HENRIQUE', '2', 'GERENTE', 2184.33, '2006-05-25');
+
+
+mysql> INSERT INTO cadfun1 VALUES (20, 'AUDREY TOLEDO', '2', 'SUPERVISORA', 1700.00, '2006-07-05');
+
+
+mysql> INSERT INTO cadfun1 VALUES ( 22, 'SANDRA MANZANO', '2','ANALISTA', 2000.00, '2006-07-01');
+
+
+mysql> INSERT INTO cadfun1 VALUES (24, 'MARCIO CANUTO', '2', 'PROGRAMADOR', 1200.00, '2006-07-10');
+
+
+mysql>  SELECT * FROM cadfun1;
++--------+------------------+-------+-------------+---------+------------+
+| CODFUN | NOME             | DEPTO | FUNCAO      | SALARIO | ADMISSAO   |
++--------+------------------+-------+-------------+---------+------------+
+|      2 | WILSON DE MACEDO | 3     | PROGRAMADOR | 1155.00 | 2006-01-15 |
+|      5 | AUGUSTO SOUZA    | 3     | PROGRAMADOR | 1155.00 | 2006-04-26 |
+|      7 | APARECIDA SILVA  | 3     | SECRETARIA  | 2530.62 | 1980-05-10 |
+|     12 | CARLOS ALBERTO   | 3     | VENDEDOR    | 1683.00 | 2000-12-21 |
+|     15 | MARCOS HENRIQUE  | 2     | GERENTE     | 2184.33 | 2006-05-25 |
+|     20 | AUDREY TOLEDO    | 2     | SUPERVISORA | 1700.00 | 2006-07-05 |
+|     22 | SANDRA MANZANO   | 2     | ANALISTA    | 2000.00 | 2006-07-01 |
+|     24 | MARCIO CANUTO    | 2     | PROGRAMADOR | 1200.00 | 2006-07-10 |
+|     44 | JACIBA DA SILVA  | 3     | NULL        | 1650.00 | NULL       |
++--------+------------------+-------+-------------+---------+------------+
+
+
+mysql> SELECT NOME, SALARIO FROM cadfun1;
++------------------+---------+
+| NOME             | SALARIO |
++------------------+---------+
+| WILSON DE MACEDO | 1155.00 |
+| AUGUSTO SOUZA    | 1155.00 |
+| APARECIDA SILVA  | 2530.62 |
+| CARLOS ALBERTO   | 1683.00 |
+| MARCOS HENRIQUE  | 2184.33 |
+| AUDREY TOLEDO    | 1700.00 |
+| SANDRA MANZANO   | 2000.00 |
+| MARCIO CANUTO    | 1200.00 |
+| JACIBA DA SILVA  | 1650.00 |
++------------------+---------+
+
+
+mysql> SELECT NOME, SALARIO + 100 FROM cadfun1;
++------------------+---------------+
+| NOME             | SALARIO + 100 |
++------------------+---------------+
+| WILSON DE MACEDO |       1255.00 |
+| AUGUSTO SOUZA    |       1255.00 |
+| APARECIDA SILVA  |       2630.62 |
+| CARLOS ALBERTO   |       1783.00 |
+| MARCOS HENRIQUE  |       2284.33 |
+| AUDREY TOLEDO    |       1800.00 |
+| SANDRA MANZANO   |       2100.00 |
+| MARCIO CANUTO    |       1300.00 |
+| JACIBA DA SILVA  |       1750.00 |
++------------------+---------------+
+
+
+mysql> SELECT NOME, SALARIO FROM cadfun1;
++------------------+---------+
+| NOME             | SALARIO |
++------------------+---------+
+| WILSON DE MACEDO | 1155.00 |
+| AUGUSTO SOUZA    | 1155.00 |
+| APARECIDA SILVA  | 2530.62 |
+| CARLOS ALBERTO   | 1683.00 |
+| MARCOS HENRIQUE  | 2184.33 |
+| AUDREY TOLEDO    | 1700.00 |
+| SANDRA MANZANO   | 2000.00 |
+| MARCIO CANUTO    | 1200.00 |
+| JACIBA DA SILVA  | 1650.00 |
++------------------+---------+
+
+
+mysql> SELECT NOME, SALARIO * 1.20 FROM cadfun1;
++------------------+----------------+
+| NOME             | SALARIO * 1.20 |
++------------------+----------------+
+| WILSON DE MACEDO |      1386.0000 |
+| AUGUSTO SOUZA    |      1386.0000 |
+| APARECIDA SILVA  |      3036.7440 |
+| CARLOS ALBERTO   |      2019.6000 |
+| MARCOS HENRIQUE  |      2621.1960 |
+| AUDREY TOLEDO    |      2040.0000 |
+| SANDRA MANZANO   |      2400.0000 |
+| MARCIO CANUTO    |      1440.0000 |
+| JACIBA DA SILVA  |      1980.0000 |
++------------------+----------------+
+
+
+mysql> SELECT NOME, SALARIO FROM cadfun1;
++------------------+---------+
+| NOME             | SALARIO |
++------------------+---------+
+| WILSON DE MACEDO | 1155.00 |
+| AUGUSTO SOUZA    | 1155.00 |
+| APARECIDA SILVA  | 2530.62 |
+| CARLOS ALBERTO   | 1683.00 |
+| MARCOS HENRIQUE  | 2184.33 |
+| AUDREY TOLEDO    | 1700.00 |
+| SANDRA MANZANO   | 2000.00 |
+| MARCIO CANUTO    | 1200.00 |
+| JACIBA DA SILVA  | 1650.00 |
++------------------+---------+
+
+
+mysql> SELECT * FROM cadfun1 WHERE DEPTO = '5';
+
+
+mysql> SELECT * FROM cadfun1 WHERE FUNCAO = 'VENDEDOR';
++--------+----------------+-------+----------+---------+------------+
+| CODFUN | NOME           | DEPTO | FUNCAO   | SALARIO | ADMISSAO   |
++--------+----------------+-------+----------+---------+------------+
+|     12 | CARLOS ALBERTO | 3     | VENDEDOR | 1683.00 | 2000-12-21 |
++--------+----------------+-------+----------+---------+------------+
+
+
+mysql> SELECT * FROM cadfun1 WHERE SALARIO <= 1700;
++--------+------------------+-------+-------------+---------+------------+
+| CODFUN | NOME             | DEPTO | FUNCAO      | SALARIO | ADMISSAO   |
++--------+------------------+-------+-------------+---------+------------+
+|      2 | WILSON DE MACEDO | 3     | PROGRAMADOR | 1155.00 | 2006-01-15 |
+|      5 | AUGUSTO SOUZA    | 3     | PROGRAMADOR | 1155.00 | 2006-04-26 |
+|     12 | CARLOS ALBERTO   | 3     | VENDEDOR    | 1683.00 | 2000-12-21 |
+|     20 | AUDREY TOLEDO    | 2     | SUPERVISORA | 1700.00 | 2006-07-05 |
+|     24 | MARCIO CANUTO    | 2     | PROGRAMADOR | 1200.00 | 2006-07-10 |
+|     44 | JACIBA DA SILVA  | 3     | NULL        | 1650.00 | NULL       |
++--------+------------------+-------+-------------+---------+------------+
+
+
+mysql> SELECT * FROM cadfun1 WHERE SALARIO > 1700 + 50;
++--------+-----------------+-------+------------+---------+------------+
+| CODFUN | NOME            | DEPTO | FUNCAO     | SALARIO | ADMISSAO   |
++--------+-----------------+-------+------------+---------+------------+
+|      7 | APARECIDA SILVA | 3     | SECRETARIA | 2530.62 | 1980-05-10 |
+|     15 | MARCOS HENRIQUE | 2     | GERENTE    | 2184.33 | 2006-05-25 |
+|     22 | SANDRA MANZANO  | 2     | ANALISTA   | 2000.00 | 2006-07-01 |
++--------+-----------------+-------+------------+---------+------------+
+
+
+mysql> SELECT * FROM cadfun1;
++--------+------------------+-------+-------------+---------+------------+
+| CODFUN | NOME             | DEPTO | FUNCAO      | SALARIO | ADMISSAO   |
++--------+------------------+-------+-------------+---------+------------+
+|      2 | WILSON DE MACEDO | 3     | PROGRAMADOR | 1155.00 | 2006-01-15 |
+|      5 | AUGUSTO SOUZA    | 3     | PROGRAMADOR | 1155.00 | 2006-04-26 |
+|      7 | APARECIDA SILVA  | 3     | SECRETARIA  | 2530.62 | 1980-05-10 |
+|     12 | CARLOS ALBERTO   | 3     | VENDEDOR    | 1683.00 | 2000-12-21 |
+|     15 | MARCOS HENRIQUE  | 2     | GERENTE     | 2184.33 | 2006-05-25 |
+|     20 | AUDREY TOLEDO    | 2     | SUPERVISORA | 1700.00 | 2006-07-05 |
+|     22 | SANDRA MANZANO   | 2     | ANALISTA    | 2000.00 | 2006-07-01 |
+|     24 | MARCIO CANUTO    | 2     | PROGRAMADOR | 1200.00 | 2006-07-10 |
+|     44 | JACIBA DA SILVA  | 3     | NULL        | 1650.00 | NULL       |
++--------+------------------+-------+-------------+---------+------------+
+
+
+mysql> SELECT * FROM cadfun1 WHERE (DEPTO = '3') AND (FUNCAO = 'PROGRAMADOR');
++--------+------------------+-------+-------------+---------+------------+
+| CODFUN | NOME             | DEPTO | FUNCAO      | SALARIO | ADMISSAO   |
++--------+------------------+-------+-------------+---------+------------+
+|      2 | WILSON DE MACEDO | 3     | PROGRAMADOR | 1155.00 | 2006-01-15 |
+|      5 | AUGUSTO SOUZA    | 3     | PROGRAMADOR | 1155.00 | 2006-04-26 |
++--------+------------------+-------+-------------+---------+------------+
+
+
+mysql> SELECT * FROM cadfun1 WHERE (DEPTO = '3') OR (DEPTO = '5');
++--------+------------------+-------+-------------+---------+------------+
+| CODFUN | NOME             | DEPTO | FUNCAO      | SALARIO | ADMISSAO   |
++--------+------------------+-------+-------------+---------+------------+
+|      2 | WILSON DE MACEDO | 3     | PROGRAMADOR | 1155.00 | 2006-01-15 |
+|      5 | AUGUSTO SOUZA    | 3     | PROGRAMADOR | 1155.00 | 2006-04-26 |
+|      7 | APARECIDA SILVA  | 3     | SECRETARIA  | 2530.62 | 1980-05-10 |
+|     12 | CARLOS ALBERTO   | 3     | VENDEDOR    | 1683.00 | 2000-12-21 |
+|     44 | JACIBA DA SILVA  | 3     | NULL        | 1650.00 | NULL       |
++--------+------------------+-------+-------------+---------+------------+
+
+
+mysql> SELECT * FROM cadfun1 WHERE NOT (FUNCAO = 'VENDEDOR');
++--------+------------------+-------+-------------+---------+------------+
+| CODFUN | NOME             | DEPTO | FUNCAO      | SALARIO | ADMISSAO   |
++--------+------------------+-------+-------------+---------+------------+
+|      2 | WILSON DE MACEDO | 3     | PROGRAMADOR | 1155.00 | 2006-01-15 |
+|      5 | AUGUSTO SOUZA    | 3     | PROGRAMADOR | 1155.00 | 2006-04-26 |
+|      7 | APARECIDA SILVA  | 3     | SECRETARIA  | 2530.62 | 1980-05-10 |
+|     15 | MARCOS HENRIQUE  | 2     | GERENTE     | 2184.33 | 2006-05-25 |
+|     20 | AUDREY TOLEDO    | 2     | SUPERVISORA | 1700.00 | 2006-07-05 |
+|     22 | SANDRA MANZANO   | 2     | ANALISTA    | 2000.00 | 2006-07-01 |
+|     24 | MARCIO CANUTO    | 2     | PROGRAMADOR | 1200.00 | 2006-07-10 |
++--------+------------------+-------+-------------+---------+------------+
+
+
+mysql> SELECT * FROM cadfun1  WHERE (DEPTO = '5') XOR (FUNCAO = 'PROGRAMADOR');
++--------+------------------+-------+-------------+---------+------------+
+| CODFUN | NOME             | DEPTO | FUNCAO      | SALARIO | ADMISSAO   |
++--------+------------------+-------+-------------+---------+------------+
+|      2 | WILSON DE MACEDO | 3     | PROGRAMADOR | 1155.00 | 2006-01-15 |
+|      5 | AUGUSTO SOUZA    | 3     | PROGRAMADOR | 1155.00 | 2006-04-26 |
+|     24 | MARCIO CANUTO    | 2     | PROGRAMADOR | 1200.00 | 2006-07-10 |
++--------+------------------+-------+-------------+---------+------------+
+
+
+mysql> ALTER TABLE cadfun ADD FILHOS SMALLINT;
+
+
+mysql> ALTER TABLE morto ADD FILHOS SMALLINT;
+
+mysql> ALTER TABLE cadfun1 ADD FILHOS SMALLINT;
+
+mysql> SELECT NOME, FILHOS FROM cadfun1;
++------------------+--------+
+| NOME             | FILHOS |
++------------------+--------+
+| WILSON DE MACEDO |   NULL |
+| AUGUSTO SOUZA    |   NULL |
+| APARECIDA SILVA  |   NULL |
+| CARLOS ALBERTO   |   NULL |
+| MARCOS HENRIQUE  |   NULL |
+| AUDREY TOLEDO    |   NULL |
+| SANDRA MANZANO   |   NULL |
+| MARCIO CANUTO    |   NULL |
+| JACIBA DA SILVA  |   NULL |
++------------------+--------+
+
+
+mysql> SELECT CODFUN, NOME, FILHOS FROM cadfun1 WHERE FILHOS IS NULL;
++--------+------------------+--------+
+| CODFUN | NOME             | FILHOS |
++--------+------------------+--------+
+|      2 | WILSON DE MACEDO |   NULL |
+|      5 | AUGUSTO SOUZA    |   NULL |
+|      7 | APARECIDA SILVA  |   NULL |
+|     12 | CARLOS ALBERTO   |   NULL |
+|     15 | MARCOS HENRIQUE  |   NULL |
+|     20 | AUDREY TOLEDO    |   NULL |
+|     22 | SANDRA MANZANO   |   NULL |
+|     24 | MARCIO CANUTO    |   NULL |
+|     44 | JACIBA DA SILVA  |   NULL |
++--------+------------------+--------+
+
+
+mysql> SELECT CODFUN, NOME, FILHOS FROM cadfun1  WHERE NOT FILHOS IS NULL;
+
+mysql> SELECT CODFUN, NOME, FILHOS FROM cadfun1  WHERE FILHOS IS NOT NULL;
+
+
+mysql> SELECT CODFUN, NOME, FILHOS FROM cadfun1 WHERE NOT (FILHOS IS NULL);
+
+
+mysql> UPDATE cadfun1 SET FILHOS = 1 WHERE CODFUN = 2;
+
+
+mysql> UPDATE cadfun1 SET FILHOS = 3 WHERE CODFUN = 3;
+
+
+mysql> UPDATE cadfun1 SET FILHOS = 2 WHERE CODFUN = 5;
+
+
+mysql> UPDATE cadfun1 SET FILHOS = 1 WHERE CODFUN = 9;
+
+mysql> UPDATE cadfun1 SET FILHOS = 4 WHERE CODFUN = 20;
+
+
+mysql> UPDATE cadfun1 SET FILHOS = 3 WHERE CODFUN = 25;
+
+
+mysql> SELECT CODFUN, NOME, FILHOS FROM cadfun1;
++--------+------------------+--------+
+| CODFUN | NOME             | FILHOS |
++--------+------------------+--------+
+|      2 | WILSON DE MACEDO |      1 |
+|      5 | AUGUSTO SOUZA    |      2 |
+|      7 | APARECIDA SILVA  |   NULL |
+|     12 | CARLOS ALBERTO   |   NULL |
+|     15 | MARCOS HENRIQUE  |   NULL |
+|     20 | AUDREY TOLEDO    |      4 |
+|     22 | SANDRA MANZANO   |   NULL |
+|     24 | MARCIO CANUTO    |   NULL |
+|     44 | JACIBA DA SILVA  |   NULL |
++--------+------------------+--------+
+
+
+mysql> SELECT CODFUN, NOME, FILHOS FROM cadfun1 WHERE FILHOS IS NULL;
++--------+-----------------+--------+
+| CODFUN | NOME            | FILHOS |
++--------+-----------------+--------+
+|      7 | APARECIDA SILVA |   NULL |
+|     12 | CARLOS ALBERTO  |   NULL |
+|     15 | MARCOS HENRIQUE |   NULL |
+|     22 | SANDRA MANZANO  |   NULL |
+|     24 | MARCIO CANUTO   |   NULL |
+|     44 | JACIBA DA SILVA |   NULL |
++--------+-----------------+--------+
+
+
+mysql> SELECT CODFUN, NOME, FILHOS FROM cadfun1  WHERE NOT (FILHOS IS NULL);
++--------+------------------+--------+
+| CODFUN | NOME             | FILHOS |
++--------+------------------+--------+
+|      2 | WILSON DE MACEDO |      1 |
+|      5 | AUGUSTO SOUZA    |      2 |
+|     20 | AUDREY TOLEDO    |      4 |
++--------+------------------+--------+
+
+
+mysql> SELECT * FROM cadfun1 WHERE SALARIO BETWEEN 1700 AND 2000;
++--------+----------------+-------+-------------+---------+------------+--------+
+| CODFUN | NOME           | DEPTO | FUNCAO      | SALARIO | ADMISSAO   | FILHOS |
++--------+----------------+-------+-------------+---------+------------+--------+
+|     20 | AUDREY TOLEDO  | 2     | SUPERVISORA | 1700.00 | 2006-07-05 |      4 |
+|     22 | SANDRA MANZANO | 2     | ANALISTA    | 2000.00 | 2006-07-01 |   NULL |
++--------+----------------+-------+-------------+---------+------------+--------+
+
+
+mysql> SELECT * FROM cadfun1  WHERE SALARIO NOT BETWEEN 1700 AND 2000;
++--------+------------------+-------+-------------+---------+------------+--------+
+| CODFUN | NOME             | DEPTO | FUNCAO      | SALARIO | ADMISSAO   | FILHOS |
++--------+------------------+-------+-------------+---------+------------+--------+
+|      2 | WILSON DE MACEDO | 3     | PROGRAMADOR | 1155.00 | 2006-01-15 |      1 |
+|      5 | AUGUSTO SOUZA    | 3     | PROGRAMADOR | 1155.00 | 2006-04-26 |      2 |
+|      7 | APARECIDA SILVA  | 3     | SECRETARIA  | 2530.62 | 1980-05-10 |   NULL |
+|     12 | CARLOS ALBERTO   | 3     | VENDEDOR    | 1683.00 | 2000-12-21 |   NULL |
+|     15 | MARCOS HENRIQUE  | 2     | GERENTE     | 2184.33 | 2006-05-25 |   NULL |
+|     24 | MARCIO CANUTO    | 2     | PROGRAMADOR | 1200.00 | 2006-07-10 |   NULL |
+|     44 | JACIBA DA SILVA  | 3     | NULL        | 1650.00 | NULL       |   NULL |
++--------+------------------+-------+-------------+---------+------------+--------+
+
+
+mysql> SELECT * FROM cadfun1 WHERE DEPTO IN ('2', '3');
++--------+------------------+-------+-------------+---------+------------+--------+
+| CODFUN | NOME             | DEPTO | FUNCAO      | SALARIO | ADMISSAO   | FILHOS |
++--------+------------------+-------+-------------+---------+------------+--------+
+|      2 | WILSON DE MACEDO | 3     | PROGRAMADOR | 1155.00 | 2006-01-15 |      1 |
+|      5 | AUGUSTO SOUZA    | 3     | PROGRAMADOR | 1155.00 | 2006-04-26 |      2 |
+|      7 | APARECIDA SILVA  | 3     | SECRETARIA  | 2530.62 | 1980-05-10 |   NULL |
+|     12 | CARLOS ALBERTO   | 3     | VENDEDOR    | 1683.00 | 2000-12-21 |   NULL |
+|     15 | MARCOS HENRIQUE  | 2     | GERENTE     | 2184.33 | 2006-05-25 |   NULL |
+|     20 | AUDREY TOLEDO    | 2     | SUPERVISORA | 1700.00 | 2006-07-05 |      4 |
+|     22 | SANDRA MANZANO   | 2     | ANALISTA    | 2000.00 | 2006-07-01 |   NULL |
+|     24 | MARCIO CANUTO    | 2     | PROGRAMADOR | 1200.00 | 2006-07-10 |   NULL |
+|     44 | JACIBA DA SILVA  | 3     | NULL        | 1650.00 | NULL       |   NULL |
++--------+------------------+-------+-------------+---------+------------+--------+
+
+
+mysql> SELECT * FROM cadfun1 WHERE DEPTO NOT IN ('2', '3');
+
+
+mysql> SELECT * FROM cadfun1 WHERE NOME LIKE 'A%';
++--------+-----------------+-------+-------------+---------+------------+--------+
+| CODFUN | NOME            | DEPTO | FUNCAO      | SALARIO | ADMISSAO   | FILHOS |
++--------+-----------------+-------+-------------+---------+------------+--------+
+|      5 | AUGUSTO SOUZA   | 3     | PROGRAMADOR | 1155.00 | 2006-04-26 |      2 |
+|      7 | APARECIDA SILVA | 3     | SECRETARIA  | 2530.62 | 1980-05-10 |   NULL |
+|     20 | AUDREY TOLEDO   | 2     | SUPERVISORA | 1700.00 | 2006-07-05 |      4 |
++--------+-----------------+-------+-------------+---------+------------+--------+
+
+
+mysql> SELECT * FROM cadfun1 WHERE NOME LIKE '_A%';
++--------+-----------------+-------+-------------+---------+------------+--------+
+| CODFUN | NOME            | DEPTO | FUNCAO      | SALARIO | ADMISSAO   | FILHOS |
++--------+-----------------+-------+-------------+---------+------------+--------+
+|     12 | CARLOS ALBERTO  | 3     | VENDEDOR    | 1683.00 | 2000-12-21 |   NULL |
+|     15 | MARCOS HENRIQUE | 2     | GERENTE     | 2184.33 | 2006-05-25 |   NULL |
+|     22 | SANDRA MANZANO  | 2     | ANALISTA    | 2000.00 | 2006-07-01 |   NULL |
+|     24 | MARCIO CANUTO   | 2     | PROGRAMADOR | 1200.00 | 2006-07-10 |   NULL |
+|     44 | JACIBA DA SILVA | 3     | NULL        | 1650.00 | NULL       |   NULL |
++--------+-----------------+-------+-------------+---------+------------+--------+
+
+
+mysql> SELECT * FROM cadfun1 WHERE NOME LIKE '%AN%';
++--------+----------------+-------+-------------+---------+------------+--------+
+| CODFUN | NOME           | DEPTO | FUNCAO      | SALARIO | ADMISSAO   | FILHOS |
++--------+----------------+-------+-------------+---------+------------+--------+
+|     22 | SANDRA MANZANO | 2     | ANALISTA    | 2000.00 | 2006-07-01 |   NULL |
+|     24 | MARCIO CANUTO  | 2     | PROGRAMADOR | 1200.00 | 2006-07-10 |   NULL |
++--------+----------------+-------+-------------+---------+------------+--------+
+
+mysql> SELECT * FROM cadfun1 WHERE SALARIO LIKE '%6';
+
+mysql> SELECT * FROM cadfun1 WHERE SALARIO LIKE '_5%2';
++--------+-----------------+-------+------------+---------+------------+--------+
+| CODFUN | NOME            | DEPTO | FUNCAO     | SALARIO | ADMISSAO   | FILHOS |
++--------+-----------------+-------+------------+---------+------------+--------+
+|      7 | APARECIDA SILVA | 3     | SECRETARIA | 2530.62 | 1980-05-10 |   NULL |
++--------+----------------+-------+------------+---------+------------+--------+
+
+
+mysql> SELECT * FROM cadfun1 WHERE NOME NOT LIKE '%AN%';
++--------+------------------+-------+-------------+---------+------------+--------+
+| CODFUN | NOME             | DEPTO | FUNCAO      | SALARIO | ADMISSAO   | FILHOS |
++--------+------------------+-------+-------------+---------+------------+--------+
+|      2 | WILSON DE MACEDO | 3     | PROGRAMADOR | 1155.00 | 2006-01-15 |      1 |
+|      5 | AUGUSTO SOUZA    | 3     | PROGRAMADOR | 1155.00 | 2006-04-26 |      2 |
+|      7 | APARECIDA SILVA  | 3     | SECRETARIA  | 2530.62 | 1980-05-10 |   NULL |
+|     12 | CARLOS ALBERTO   | 3     | VENDEDOR    | 1683.00 | 2000-12-21 |   NULL |
+|     15 | MARCOS HENRIQUE  | 2     | GERENTE     | 2184.33 | 2006-05-25 |   NULL |
+|     20 | AUDREY TOLEDO    | 2     | SUPERVISORA | 1700.00 | 2006-07-05 |      4 |
+|     44 | JACIBA DA SILVA  | 3     | NULL        | 1650.00 | NULL       |   NULL |
++--------+------------------+-------+-------------+---------+------------+--------+
+
+
+mysql> SELECT NOME, SALARIO FROM cadfun1 WHERE SALARIO LIKE '11%';
++------------------+---------+
+| NOME             | SALARIO |
++------------------+---------+
+| WILSON DE MACEDO | 1155.00 |
+| AUGUSTO SOUZA    | 1155.00 |
++------------------+---------+
+
+
+
+mysql>  SELECT NOME, SALARIO FROM cadfun1 WHERE SALARIO LIKE '8%';
+
+
+mysql>  SELECT NOME, SALARIO FROM cadfun1 WHERE SALARIO LIKE '_0%';
++----------------+---------+
+| NOME           | SALARIO |
++----------------+---------+
+| SANDRA MANZANO | 2000.00 |
++----------------+---------+
+
+
+mysql>  SELECT NOME, SALARIO FROM cadfun1 WHERE SALARIO LIKE '1_%_%';
++------------------+---------+
+| NOME             | SALARIO |
++------------------+---------+
+| WILSON DE MACEDO | 1155.00 |
+| AUGUSTO SOUZA    | 1155.00 |
+| CARLOS ALBERTO   | 1683.00 |
+| AUDREY TOLEDO    | 1700.00 |
+| MARCIO CANUTO    | 1200.00 |
+| JACIBA DA SILVA  | 1650.00 |
++------------------+---------+
+
+mysql>  SELECT NOME, SALARIO FROM cadfun1 WHERE SALARIO LIKE '%6';
+
+mysql> SELECT NOME, SALARIO FROM cadfun1 WHERE SALARIO LIKE '_1%6';
+

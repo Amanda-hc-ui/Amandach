@@ -1,0 +1,27 @@
+mysql> CREATE DATABASE IF NOT EXISTS petshop;
+
+mysql> USE petshop;
+
+mysql> CREATE TABLE Clientes (id_cliente INT AUTO_INCREMENT PRIMARY KEY, nome VARCHAR(100) NOT NULL,  telefone VARCHAR(20),   email VARCHAR(100));
+
+mysql> CREATE TABLE Animais ( id_animal INT AUTO_INCREMENT PRIMARY KEY,  nome VARCHAR(100) NOT NULL, especie VARCHAR(50),  raca VARCHAR(50), data_nascimento DATE, id_cliente INT,   FOREIGN KEY (id_cliente) REFERENCES Clientes(id_cliente));
+
+mysql> CREATE TABLE Serviços (  id_serviço INT AUTO_INCREMENT PRIMARY KEY,   nome VARCHAR(100) NOT NULL,    preço DECIMAL(8,2) NOT NULL,  duracao_minutos INT NOT NULL);
+
+mysql> CREATE TABLE Funcionarios (  id_funcionario INT AUTO_INCREMENT PRIMARY KEY,  nome VARCHAR(100) NOT NULL,  especialidade VARCHAR(100), horario_inicio TIME,   horario_fim TIME);
+
+mysql> CREATE TABLE Agendamentos ( id_agendamento INT AUTO_INCREMENT PRIMARY KEY, data DATE NOT NULL, hora TIME NOT NULL,  id_serviço INT NOT NULL, id_animal INT NOT NULL,   id_funcionario INT NOT NULL,  FOREIGN KEY (id_serviço) REFERENCES Serviços(id_serviço),  FOREIGN KEY (id_animal) REFERENCES Animais(id_animal), FOREIGN KEY (id_funcionario) REFERENCES Funcionarios(id_funcionario));
+
+mysql> ALTER TABLE Agendamentos ADD CONSTRAINT unique_animal_horario UNIQUE (data, hora, id_animal);
+
+mysql> ALTER TABLE Agendamentos ADD CONSTRAINT unique_funcionario_horario UNIQUE (data, hora, id_funcionario);
+
+mysql> INSERT INTO Clientes (nome, telefone, email) VALUES ('Ana Silva', '11999999999', 'ana.silva@email.com'), ('Bruno Costa', '11888888888', 'bruno.costa@email.com'), ('Carla Souza', '11777777777', 'carla.souza@email.com'), ('Daniel Lima', '11666666666', 'daniel.lima@email.com'), ('Elisa Martins', '11555555555', 'elisa.martins@email.com');
+
+mysql> INSERT INTO Animais (nome, especie, raca, data_nascimento, id_cliente) VALUES ('Rex', 'Cachorro', 'Labrador', '2018-06-15', 1), ('Mimi', 'Gato', 'Siamês', '2020-02-10', 2), ('Bolt', 'Cachorro', 'Border Collie', '2019-11-20', 3), ('Luna', 'Gato', 'Persa', '2021-05-30', 4), ('Toby', 'Cachorro', 'Poodle', '2017-01-12', 5);
+
+mysql> INSERT INTO Serviços (nome, preço, duracao_minutos) VALUES ('Banho', 50.00, 30), ('Tosa', 80.00, 60), ('Consulta Veterinária', 120.00, 45), ('Vacinação', 100.00, 20), ('Hidratação', 70.00, 40);
+
+mysql> INSERT INTO Funcionarios (nome, especialidade, horario_inicio, horario_fim) VALUES ('Lucas Pereira', 'Banho e Tosa', '08:00:00', '17:00:00'), ('Mariana Alves', 'Veterinária', '09:00:00', '18:00:00'), ('Felipe Santos', 'Banho e Tosa', '08:00:00', '16:00:00'), ('Renata Costa', 'Veterinária', '10:00:00', '19:00:00'), ('João Oliveira', 'Atendimento', '07:00:00', '15:00:00');
+
+mysql> INSERT INTO Agendamentos (data, hora, id_serviço, id_animal, id_funcionario) VALUES ('2025-07-10', '09:00:00', 1, 1, 1), ('2025-07-10', '10:00:00', 2, 2, 3), ('2025-07-10', '11:00:00', 3, 3, 2), ('2025-07-10', '14:00:00', 4, 4, 4), ('2025-07-10', '15:00:00', 5, 5, 5);

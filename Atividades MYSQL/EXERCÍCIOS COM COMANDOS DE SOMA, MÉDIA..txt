@@ -1,0 +1,345 @@
+mysql>  CREATE DATABASE Loja2;
+
+mysql> USE Loja2;
+mysql> CREATE TABLE Clientes (id INT PRIMARY KEY AUTO_INCREMENT, nome VARCHAR(100) NOT NULL);
+
+mysql> CREATE TABLE Vendas (id INT PRIMARY KEY AUTO_INCREMENT,cliente_id INT,valor DECIMAL(10, 2) NOT NULL,data_venda DATE,FOREIGN KEY (cliente_id) REFERENCES Clientes(id));
+
+mysql> INSERT INTO Clientes (nome) VALUES ('João Silva'), ('Maria Oliveira'), ('Carlos Souza');
+
+mysql>  INSERT INTO Vendas (cliente_id, valor, data_venda) VALUES (1, 150.50, '2023-01-10'), (1, 200.75, '2023-02-15'), (2, 300.00, '2023-01-20'), (3, 50.25, '2023-03-05'), (3, 120.90, '2023-03-10');
+
+mysql> SELECT c.nome, SUM(v.valor) AS total_vendas FROM Clientes c JOIN Vendas v ON c.id = v.cliente_id GROUP BY c.id;
++----------------+--------------+
+| nome           | total_vendas |
++----------------+--------------+
+| João Silva     |       351.25 |
+| Maria Oliveira |       300.00 |
+| Carlos Souza   |       171.15 |
++----------------+--------------+
+mysql> CREATE DATABASE Escola1;
+mysql> USE Escola1;
+mysql> CREATE TABLE Alunos (id INT PRIMARY KEY AUTO_INCREMENT, nome VARCHAR(100) NOT NULL, nota DECIMAL(3, 1) NOT NULL );
+
+mysql> INSERT INTO Alunos (nome, nota) VALUES ('Ana', 8.5), ('Bruno', 5.0), ('Clara', 7.0), ('Daniel', 6.5);
+
+mysql> SELECT AVG(nota) AS media_aprovados FROM Alunos WHERE nota >= 6;
++-----------------+
+| media_aprovados |
++-----------------+
+|         7.33333 |
++-----------------+
+mysql> CREATE DATABASE Empresa;
+
+mysql> USE Empresa;
+mysql> CREATE TABLE Funcionarios (id INT PRIMARY KEY AUTO_INCREMENT,nome VARCHAR(100) NOT NULL, departamento VARCHAR(50) NOT NULL);
+
+mysql> INSERT INTO Funcionarios (nome, departamento) VALUES  ('João', 'TI'), ('Maria', 'RH'), ('Carlos', 'TI'), ('Ana', 'Vendas'), ('Pedro', 'TI');
+
+mysql> SELECT departamento, COUNT(*) AS qtd_funcionarios FROM Funcionarios GROUP BY departamento HAVING COUNT(*) > 2;
++--------------+------------------+
+| departamento | qtd_funcionarios |
++--------------+------------------+
+| TI           |                3 |
++--------------+------------------+
+
+mysql> CREATE DATABASE Supermercado;
+
+mysql> USE Supermercado;
+mysql> CREATE TABLE Produtos ( id INT PRIMARY KEY AUTO_INCREMENT, nome VARCHAR(100) NOT NULL,preco DECIMAL(10, 2) NOT NULL);
+
+mysql> INSERT INTO Produtos (nome, preco) VALUES ('Arroz', 25.90), ('TV', 1200.00), ('Leite', 5.50), ('Notebook', 3500.00);
+
+mysql> SELECT CASE WHEN preco > 100 THEN 'Caro' ELSE 'Barato' END AS categoria, COUNT(*) AS quantidade FROM Produtos GROUP BY categoria;
++-----------+------------+
+| categoria | quantidade |
++-----------+------------+
+| Barato    |          2 |
+| Caro      |          2 |
++-----------+------------+
+mysql> CREATE DATABASE RH;
+
+mysql> USE RH;
+mysql> CREATE TABLE Funcionarios ( id INT PRIMARY KEY AUTO_INCREMENT,nome VARCHAR(100) NOT NULL,departamento VARCHAR(50) NOT NULL,salario DECIMAL(10, 2) NOT NULL );
+
+mysql> INSERT INTO Funcionarios (nome, departamento, salario) VALUES ('João', 'TI', 5000.00), ('Maria', 'RH', 3500.00), ('Carlos', 'TI', 4500.00), ('Ana', 'Vendas', 3000.00);
+
+mysql> SELECT departamento, AVG(salario) AS media_salarial, MAX(salario) AS maior_salario, MIN(salario) AS menor_salario FROM Funcionarios GROUP BY departamento;
++--------------+----------------+---------------+---------------+
+| departamento | media_salarial | maior_salario | menor_salario |
++--------------+----------------+---------------+---------------+
+| TI           |    4750.000000 |       5000.00 |       4500.00 |
+| RH           |    3500.000000 |       3500.00 |       3500.00 |
+| Vendas       |    3000.000000 |       3000.00 |       3000.00 |
++--------------+----------------+---------------+---------------+
+mysql> CREATE DATABASE loja_eletronicos;
+
+mysql> USE loja_eletronicos;
+mysql>  CREATE TABLE produtos ( id INT PRIMARY KEY AUTO_INCREMENT, nome VARCHAR(100) NOT NULL, categoria VARCHAR(50), preco DECIMAL(10,2) NOT NULL, estoque INT NOT NULL, data_cadastro DATE);
+
+mysql> INSERT INTO produtos (nome, categoria, preco, estoque, data_cadastro) VALUES ('Smartphone X', 'Celulares', 2999.90, 50, '2023-01-15'), ('Notebook Pro', 'Computadores', 5499.90, 30, '2023-02-20'), ('Tablet Lite', 'Tablets', 1299.90, 75, '2023-03-10'), ('Fone Bluetooth', 'Acessórios', 299.90, 120, '2023-01-25'), ('Smart TV 55"', 'Televisores', 3999.90, 25, '2023-04-05'), ('Mouse Gamer', 'Acessórios', 249.90, 80, '2023-02-15');
+mysql> SELECT AVG(preco) AS preco_medio FROM produtos;
++-------------+
+| preco_medio |
++-------------+
+| 2391.566667 |
++-------------+
+
+mysql> SELECT MAX(preco) AS maior_preco FROM produtos;
++-------------+
+| maior_preco |
++-------------+
+|     5499.90 |
++-------------+
+
+mysql> SELECT categoria, SUM(preco * estoque) AS valor_total_estoque FROM produtos GROUP BY categoria;
++--------------+---------------------+
+| categoria    | valor_total_estoque |
++--------------+---------------------+
+| Celulares    |           149995.00 |
+| Computadores |           164997.00 |
+| Tablets      |            97492.50 |
+| Acessórios   |            55980.00 |
+| Televisores  |            99997.50 |
++--------------+---------------------+
+
+mysql> SELECT categoria, COUNT(*) AS quantidade_produtos FROM produtos GROUP BY categoria;
++--------------+---------------------+
+| categoria    | quantidade_produtos |
++--------------+---------------------+
+| Celulares    |                   1 |
+| Computadores |                   1 |
+| Tablets      |                   1 |
+| Acessórios   |                   2 |
+| Televisores  |                   1 |
++--------------+---------------------+
+
+mysql> SELECT MIN(preco) AS menor_preco FROM produtos WHERE estoque > 0;
++-------------+
+| menor_preco |
++-------------+
+|      249.90 |
++-------------+
+mysql> CREATE DATABASE cadastro_clientes;
+
+mysql> USE cadastro_clientes;
+mysql> CREATE TABLE clientes ( id INT PRIMARY KEY AUTO_INCREMENT, nome_completo VARCHAR(100) NOT NULL,email VARCHAR(100), telefone VARCHAR(20), data_nascimento DATE, cpf VARCHAR(14));
+
+mysql> INSERT INTO clientes (nome_completo, email, telefone, data_nascimento, cpf) VALUES ('Maria da Silva', 'maria.silva@email.com', '(11) 98765-4321', '1985-05-15', '123.456.789-00'), ('João Oliveira', 'joao.oliveira@email.com', '(21) 91234-5678', '1990-08-22', '987.654.321-00'), ('Ana Paula Santos', 'ana.santos@email.com', '(31) 99876-5432', '1988-11-30', '456.789.123-00'), ('Carlos Eduardo Pereira', 'carlos.pereira@email.com', '(41) 92345-6789', '1995-03-10', '789.123.456-00');
+mysql> SELECT nome_completo, SUBSTRING_INDEX(nome_completo, ' ', 1) AS primeiro_nome FROM clientes;
++------------------------+---------------+
+| nome_completo          | primeiro_nome |
++------------------------+---------------+
+| Maria da Silva         | Maria         |
+| João Oliveira          | João          |
+| Ana Paula Santos       | Ana           |
+| Carlos Eduardo Pereira | Carlos        |
++------------------------+---------------+
+
+mysql> SELECT nome_completo, REPLACE(REPLACE(cpf, '.', ''), '-', '') AS cpf_sem_formatacao FROM clientes;
++------------------------+--------------------+
+| nome_completo          | cpf_sem_formatacao |
++------------------------+--------------------+
+| Maria da Silva         | 12345678900        |
+| João Oliveira          | 98765432100        |
+| Ana Paula Santos       | 45678912300        |
+| Carlos Eduardo Pereira | 78912345600        |
++------------------------+--------------------+
+
+mysql> SELECT nome_completo, COALESCE(email, CONCAT(LCASE(REPLACE(SUBSTRING_INDEX(nome_completo , ' ', 1), ' ', '')), '@empresa.com')) AS email_utilizado FROM clientes;
++------------------------+--------------------------+
+| nome_completo          | email_utilizado          |
++------------------------+--------------------------+
+| Maria da Silva         | maria.silva@email.com    |
+| João Oliveira          | joao.oliveira@email.com  |
+| Ana Paula Santos       | ana.santos@email.com     |
+| Carlos Eduardo Pereira | carlos.pereira@email.com |
++------------------------+--------------------------+
+
+mysql> SELECT nome_completo, LENGTH(nome_completo) AS tamanho_nome FROM clientes;
++------------------------+--------------+
+| nome_completo          | tamanho_nome |
++------------------------+--------------+
+| Maria da Silva         |           14 |
+| João Oliveira          |           14 |
+| Ana Paula Santos       |           16 |
+| Carlos Eduardo Pereira |           22 |
++------------------------+--------------+
+
+mysql> SELECT  nome_completo, telefone, SUBSTRING(telefone, 2, 2) AS ddd FROM clientes;
++------------------------+-----------------+------+
+| nome_completo          | telefone        | ddd  |
++------------------------+-----------------+------+
+| Maria da Silva         | (11) 98765-4321 | 11   |
+| João Oliveira          | (21) 91234-5678 | 21   |
+| Ana Paula Santos       | (31) 99876-5432 | 31   |
+| Carlos Eduardo Pereira | (41) 92345-6789 | 41   |
++------------------------+-----------------+------+
+
+mysql> CREATE DATABASE biblioteca;
+
+mysql> USE biblioteca;
+mysql> CREATE TABLE emprestimos ( id INT PRIMARY KEY AUTO_INCREMENT, id_livro INT NOT NULL,id_usuario INT NOT NULL,data_emprestimo DATETIME NOT NULL, data_devolucao_prevista DATE NOT NULL, data_devolucao_efetiva DATE,  multa DECIMAL(10,2) DEFAULT 0.00);
+
+mysql> INSERT INTO emprestimos (id_livro, id_usuario, data_emprestimo, data_devolucao_prevista, data_devolucao_efetiva, multa) VALUES (101, 1, '2023-05-01 10:30:00', '2023-05-15', '2023-05-14', 0.00), (102, 2, '2023-05-03 14:15:00', '2023-05-17', '2023-05-18', 5.00), (103, 3, '2023-05-05 09:00:00', '2023-05-19', NULL, 0.00), (104, 1, '2023-05-10 16:45:00', '2023-05-24', '2023-05-25', 3.50), (105, 4, '2023-05-12 11:20:00', '2023-05-26', '2023-05-26', 0.00);
+
+mysql> SELECT id,  DATEDIFF(data_devolucao_efetiva, data_devolucao_prevista) AS dias_atraso FROM emprestimos WHERE data_devolucao_efetiva > data_devolucao_prevista;
++----+-------------+
+| id | dias_atraso |
++----+-------------+
+|  2 |           1 |
+|  4 |           1 |
++----+-------------+
+
+mysql> SELECT id, DATEDIFF(CURRENT_DATE(), data_devolucao_prevista) AS dias_atraso FROM emprestimos WHERE data_devolucao_efetiva IS NULL AND CURRENT_DATE() > data_devolucao_prevista;
++----+-------------+
+| id | dias_atraso |
++----+-------------+
+|  3 |         733 |
++----+-------------+
+
+mysql> SELECT id, DATEDIFF(data_devolucao_efetiva, DATE(data_emprestimo)) AS dias_emprestimo FROM emprestimos WHERE data_devolucao_efetiva IS NOT NULL;
++----+-----------------+
+| id | dias_emprestimo |
++----+-----------------+
+|  1 |              13 |
+|  2 |              15 |
+|  4 |              15 |
+|  5 |              14 |
++----+-----------------+
+
+mysql> SELECT id, DATE_FORMAT(data_emprestimo, '%d/%m/%Y %H:%i') AS data_formatada FROM emprestimos WHERE MONTH(data_emprestimo) = MONTH(CURRENT_DATE()) AND YEAR(data_emprestimo) = YEAR(CURRENT_DATE());
+
+mysql> SELECT id, GREATEST(0, DATEDIFF(data_devolucao_efetiva, data_devolucao_prevista)) AS dias_atraso,GREATEST(0, DATEDIFF(data_devolucao_efetiva, data_devolucao_prevista)) * 1.00 AS multa_calculada FROM emprestimos WHERE data_devolucao_efetiva IS NOT NULL;
++----+-------------+-----------------+
+| id | dias_atraso | multa_calculada |
++----+-------------+-----------------+
+|  1 |           0 |            0.00 |
+|  2 |           1 |            1.00 |
+|  4 |           1 |            1.00 |
+|  5 |           0 |            0.00 |
+mysql> CREATE DATABASE loja_construcao;
+
+mysql> USE loja_construcao;
+mysql> CREATE TABLE produtos (id INT PRIMARY KEY AUTO_INCREMENT,nome VARCHAR(100) NOT NULL, preco_custo DECIMAL(10,2) NOT NULL, margem_lucro DECIMAL(5,2) NOT NULL,quantidade_estoque DECIMAL(10,3) NOT NULL, unidade_medida VARCHAR(10));
+
+mysql> INSERT INTO produtos (nome, preco_custo, margem_lucro, quantidade_estoque, unidade_medida) VALUES ('Cimento CP II 32kg', 28.50, 30.00, 150.000, 'sacos'), ('Tijolo Cerâmico', 0.85, 50.00, 5000.000, 'un'), ('Areia Média', 45.00, 25.00, 12.500, 'm³'), ('Brita 1', 60.00, 20.00, 8.750, 'm³'), ('Tubo PVC 100mm', 22.40, 40.00, 120.000, 'un'), ('Argamassa', 15.80, 35.00, 80.000, 'sacos');
+
+mysql> SELECT nome, preco_custo, margem_lucro, ROUND(preco_custo * (1 + margem_lucro / 100), 2) AS preco_venda FROM produtos;
++--------------------+-------------+--------------+-------------+
+| nome               | preco_custo | margem_lucro | preco_venda |
++--------------------+-------------+--------------+-------------+
+| Cimento CP II 32kg |       28.50 |        30.00 |       37.05 |
+| Tijolo Cerâmico    |        0.85 |        50.00 |        1.28 |
+| Areia Média        |       45.00 |        25.00 |       56.25 |
+| Brita 1            |       60.00 |        20.00 |       72.00 |
+| Tubo PVC 100mm     |       22.40 |        40.00 |       31.36 |
+| Argamassa          |       15.80 |        35.00 |       21.33 |
++--------------------+-------------+--------------+-------------+
+
+mysql> SELECT nome,  quantidade_estoque, unidade_medida, preco_custo, ROUND(quantidade_estoque * preco_custo * (1 + margem_lucro / 100), 2) AS valor_total_estoque FROM produtos;
++--------------------+--------------------+----------------+-------------+---------------------+
+| nome               | quantidade_estoque | unidade_medida | preco_custo | valor_total_estoque |
++--------------------+--------------------+----------------+-------------+---------------------+
+| Cimento CP II 32kg |            150.000 | sacos          |       28.50 |             5557.50 |
+| Tijolo Cerâmico    |           5000.000 | un             |        0.85 |             6375.00 |
+| Areia Média        |             12.500 | m³             |       45.00 |              703.13 |
+| Brita 1            |              8.750 | m³             |       60.00 |              630.00 |
+| Tubo PVC 100mm     |            120.000 | un             |       22.40 |             3763.20 |
+| Argamassa          |             80.000 | sacos          |       15.80 |             1706.40 |
++--------------------+--------------------+----------------+-------------+---------------------+
+
+mysql> SELECT nome, ROUND(preco_custo * (1 + margem_lucro / 100), 2) AS preco_original,ROUND(preco_custo * (1 + margem_lucro / 100) * 0.9, 2) AS preco_com_desconto FROM produtos WHERE (unidade_medida = 'un' AND quantidade_estoque > 100) OR (unidade_medida != 'un' AND quantidade_estoque > 10);
++--------------------+----------------+--------------------+
+| nome               | preco_original | preco_com_desconto |
++--------------------+----------------+--------------------+
+| Cimento CP II 32kg |          37.05 |              33.35 |
+| Tijolo Cerâmico    |           1.28 |               1.15 |
+| Areia Média        |          56.25 |              50.63 |
+| Tubo PVC 100mm     |          31.36 |              28.22 |
+| Argamassa          |          21.33 |              19.20 |
++--------------------+----------------+--------------------+
+
+mysql> SELECT nome, quantidade_estoque, CASE WHEN unidade_medida = 'un' THEN ROUND(quantidade_estoque) ELSE quantidade_estoque END AS quantidade_ajustada FROM produtos;
++--------------------+--------------------+---------------------+
+| nome               | quantidade_estoque | quantidade_ajustada |
++--------------------+--------------------+---------------------+
+| Cimento CP II 32kg |            150.000 |             150.000 |
+| Tijolo Cerâmico    |           5000.000 |                5000 |
+| Areia Média        |             12.500 |              12.500 |
+| Brita 1            |              8.750 |               8.750 |
+| Tubo PVC 100mm     |            120.000 |                 120 |
+| Argamassa          |             80.000 |              80.000 |
++--------------------+--------------------+---------------------+
+
+mysql> SELECT nome, preco_custo,ROUND(preco_custo * (1 + margem_lucro / 100) / 32, 3) AS preco_por_Kg FROM produtos WHERE nome LIKE '%kg%';
++--------------------+-------------+--------------+
+| nome               | preco_custo | preco_por_Kg |
++--------------------+-------------+--------------+
+| Cimento CP II 32kg |       28.50 |        1.158 |
++--------------------+-------------+--------------+
+
+mysql> CREATE DATABASE sistema_rh;
+
+
+mysql> USE sistema_rh;
+mysql> CREATE TABLE funcionarios (id INT PRIMARY KEY AUTO_INCREMENT, nome VARCHAR(100) NOT NULL,cargo VARCHAR(50) NOT NULL, salario_base DECIMAL(10,2) NOT NULL, data_admissao DATE NOT NULL,  departamento VARCHAR(50), ativo BOOLEAN DEFAULT TRUE);
+
+mysql> INSERT INTO funcionarios (nome, cargo, salario_base, data_admissao, departamento, ativo) VALUES ('Ana Souza', 'Gerente', 8500.00, '2018-06-15', 'Administrativo', TRUE), ('Carlos Mendes', 'Desenvolvedor', 6200.00, '2020-03-10', 'TI', TRUE), ('Mariana Oliveira', 'Analista', 4800.00, '2021-11-22', 'Financeiro',TRUE), ('Pedro Santos', 'Assistente', 3200.00, '2022-05-30', 'RH', TRUE), ('Juliana Costa', 'Desenvolvedor', 5800.00, '2019-08-12', 'TI', FALSE), ('Ricardo Pereira', 'Diretor', 12000.00, '2017-02-05', 'Administrativo ', TRUE);
+
+mysql> SELECT nome, cargo, salario_base, CASE WHEN salario_base < 4000 THEN 'Até R$ 4.000' WHEN salario_base BETWEEN 4000 AND 7000 THEN 'Entre R$ 4.000 e R$ 7.000'WHEN salario_base BETWEEN 7000 AND 10000 THEN 'Entre R$ 7.000 e R$ 10.000' ELSE 'Acima de R$ 10.000' END AS faixa_salarial FROM funcionarios WHERE ativo = TRUE;
++------------------+---------------+--------------+----------------------------+
+| nome             | cargo         | salario_base | faixa_salarial             |
++------------------+---------------+--------------+----------------------------+
+| Ana Souza        | Gerente       |      8500.00 | Entre R$ 7.000 e R$ 10.000 |
+| Carlos Mendes    | Desenvolvedor |      6200.00 | Entre R$ 4.000 e R$ 7.000  |
+| Mariana Oliveira | Analista      |      4800.00 | Entre R$ 4.000 e R$ 7.000  |
+| Pedro Santos     | Assistente    |      3200.00 | Até R$ 4.000               |
+| Ricardo Pereira  | Diretor       |     12000.00 | Acima de R$ 10.000         |
++------------------+---------------+--------------+----------------------------+
+
+mysql> SELECT nome,  data_admissao, CONCAT(TIMESTAMPDIFF(YEAR, data_admissao, CURRENT_DATE()), ' anos e ', TIMESTAMPDIFF(MONTH, data_admissao, CURRENT_DATE()) % 12, ' meses') AS tempo_empresa FROM funcionarios;
++------------------+---------------+-------------------+
+| nome             | data_admissao | tempo_empresa     |
++------------------+---------------+-------------------+
+| Ana Souza        | 2018-06-15    | 6 anos e 11 meses |
+| Carlos Mendes    | 2020-03-10    | 5 anos e 2 meses  |
+| Mariana Oliveira | 2021-11-22    | 3 anos e 5 meses  |
+| Pedro Santos     | 2022-05-30    | 2 anos e 11 meses |
+| Juliana Costa    | 2019-08-12    | 5 anos e 9 meses  |
+| Ricardo Pereira  | 2017-02-05    | 8 anos e 3 meses  |
++------------------+---------------+-------------------+
+
+mysql> SELECT nome, salario_base, TIMESTAMPDIFF(YEAR, data_admissao, CURRENT_DATE()) AS anos_empresa, CASE WHEN TIMESTAMPDIFF(YEAR, data_admissao, CURRENT_DATE()) >= 3 THEN ROUND(salario_base * 0.05, 2) ELSE ROUND(salario_base * 0.03, 2) END AS bonus_anual FROM funcionarios WHERE ativo = TRUE;
++------------------+--------------+--------------+-------------+
+| nome             | salario_base | anos_empresa | bonus_anual |
++------------------+--------------+--------------+-------------+
+| Ana Souza        |      8500.00 |            6 |      425.00 |
+| Carlos Mendes    |      6200.00 |            5 |      310.00 |
+| Mariana Oliveira |      4800.00 |            3 |      240.00 |
+| Pedro Santos     |      3200.00 |            2 |       96.00 |
+| Ricardo Pereira  |     12000.00 |            8 |      600.00 |
++------------------+--------------+--------------+-------------+
+
+mysql> SELECT nome, cargo, IF(ativo, 'Ativo', 'Inativo') AS status_funcionario FROM funcionarios;
++------------------+---------------+--------------------+
+| nome             | cargo         | status_funcionario |
++------------------+---------------+--------------------+
+| Ana Souza        | Gerente       | Ativo              |
+| Carlos Mendes    | Desenvolvedor | Ativo              |
+| Mariana Oliveira | Analista      | Ativo              |
+| Pedro Santos     | Assistente    | Ativo              |
+| Juliana Costa    | Desenvolvedor | Inativo            |
+| Ricardo Pereira  | Diretor       | Ativo              |
++------------------+---------------+--------------------+
+
+mysql> SELECT nome,  salario_base AS salario_bruto, CASE WHEN salario_base > 5000 THEN ROUND(salario_base * 0.725, 2) ELSE ROUND(salario_base * 0.80, 2) END AS salario_liquido_estimado FROM funcionarios WHERE ativo = TRUE;
++------------------+---------------+--------------------------+
+| nome             | salario_bruto | salario_liquido_estimado |
++------------------+---------------+--------------------------+
+| Ana Souza        |       8500.00 |                  6162.50 |
+| Carlos Mendes    |       6200.00 |                  4495.00 |
+| Mariana Oliveira |       4800.00 |                  3840.00 |
+| Pedro Santos     |       3200.00 |                  2560.00 |
+| Ricardo Pereira  |      12000.00 |                  8700.00 |
++------------------+---------------+--------------------------+

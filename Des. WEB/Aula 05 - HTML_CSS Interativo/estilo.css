@@ -1,0 +1,1080 @@
+/*
+* O seletor universal (*) aplica estilos a TODOS os elementos na página.
+* É comumente usado para "resetar" as configurações padrão do navegador,
+* garantindo que o layout comece de um ponto mais previsível.
+*/
+* {
+    /*
+    * Remove a margem externa padrão de todos os elementos.
+    * Navegadores geralmente aplicam margens padrão a elementos como <body>, <p>, <h1>, etc.
+    * Zerar isso nos dá controle total sobre o espaçamento.
+    */
+    margin: 0;
+    /*
+    * Remove o preenchimento interno padrão (padding) de todos os elementos.
+    * Assim como a margem, o padding padrão pode variar entre os navegadores.
+    */
+    padding: 0;
+    /*
+    * Define como o tamanho de um elemento é calculado.
+    * 'border-box' inclui o padding e a borda no 'width' e 'height' total do elemento.
+    * Isso simplifica muito o cálculo de layouts, pois um elemento com `width: 100px; padding: 10px; border: 1px;`
+    * ainda terá 100px de largura total, em vez de 100px + 20px (padding) + 2px (borda).
+    */
+    box-sizing: border-box;
+}
+
+/*
+* Estilos aplicados ao elemento <body>, que representa todo o conteúdo da página visível.
+*/
+body {
+    /*
+    * Define a família da fonte para o texto no corpo da página.
+    * 'Arial' é a fonte primária, e 'sans-serif' é uma fonte genérica de fallback
+    * caso 'Arial' não esteja disponível, garantindo que o texto ainda seja exibido sem serifa.
+    */
+    font-family: 'Georgia', sans-serif;
+    /*
+    * Define a altura da linha do texto. 1.6 significa que a altura da linha será 1.6 vezes 
+    o tamanho da fonte.
+    * Isso melhora a legibilidade, adicionando mais espaço vertical entre as linhas de texto.
+    */
+    line-height: 1.6;
+    /*
+    * Esconde qualquer conteúdo que exceda a largura horizontal da viewport.
+    * Isso é crucial para evitar barras de rolagem horizontais indesejadas,
+    * especialmente quando se trabalha com layouts responsivos ou animações.
+    */
+    overflow-x: hidden;
+    /*
+    * Aplica um fundo com um gradiente linear.
+    * '135deg' define a direção do gradiente (neste caso, diagonal).
+    * '#667eea' é a cor de início e '#764ba2' é a cor de fim.
+    * Cria um visual moderno e dinâmico.
+    */
+    background: linear-gradient(135deg, #f2a9ea 0%, #a44593 100%);
+    /*
+    * Garante que o corpo da página ocupe pelo menos 100% da altura da viewport.
+    * Isso é útil para fundos que devem cobrir a tela inteira, mesmo se o conteúdo for curto.
+    */
+    min-height: 100vh;
+}
+
+/* --- */
+
+/*
+* Comentário para organizar o código: "Header com animação de entrada".
+* É uma boa prática usar comentários para seções lógicas do CSS.
+*/
+/* Header com animação de entrada */
+/*
+* Estilos aplicados ao elemento <header>.
+*/
+header {
+    /*
+    * Posiciona o header de forma fixa na viewport, ou seja, ele permanece visível
+    * mesmo quando a página é rolada.
+    */
+    position: fixed;
+    /*
+    * Anexa o header ao topo da viewport.
+    */
+    top: 0;
+    /*
+    * Garante que o header ocupe 100% da largura disponível.
+    */
+    width: 100%;
+    /*
+    * Adiciona preenchimento interno ao header: 1rem (16px) vertical e 2rem (32px) horizontal.
+    */
+    padding: 1rem 2rem;
+    /*
+    * Define um fundo semi-transparente para o header.
+    * 'rgba(255, 255, 255, 0.1)' é branco com 10% de opacidade.
+        */
+        background: rgba(103, 31, 98, 0.1);
+    /*
+    * Aplica um efeito de desfoque (blur) ao conteúdo por trás do header.
+    * Cria um efeito de "vidro fosco" moderno. (Funciona bem em navegadores mais modernos).
+    */
+    backdrop-filter: blur(10px);
+    /*
+    * Adiciona uma borda inferior de 1px sólida, branca e semi-transparente.
+    */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    /*
+    * Define a ordem de empilhamento do header. Um valor alto (1000) garante que ele fique
+    * acima de outros elementos na página, evitando que seja coberto por eles.
+    */
+    z-index: 1000;
+    /*
+    * Aplica uma animação chamada 'slideDown' com duração de 0.8 segundos,
+    * função de temporização 'ease-out' (começa rápido e desacelera)
+    * ao carregar a página.
+    */
+    animation: slideDown 0.8s ease-out;
+}
+
+/*
+* Define a animação 'slideDown'.
+* @keyframes é uma regra-chave no CSS para criar animações personalizadas.
+*/
+@keyframes slideDown {
+    /*
+    * Estado inicial da animação (0%).
+    */
+    from {
+        /*
+        * Move o elemento para cima em 100% da sua própria altura,
+        * fazendo com que ele comece fora da tela na parte superior.
+        */
+        transform: translateY(-100%);
+        /*
+        * Define a opacidade inicial como 0 (totalmente transparente).
+        */
+        opacity: 0;
+    }
+
+    /*
+    * Estado final da animação (100%).
+    */
+    to {
+        /*
+        * Retorna o elemento à sua posição original (nenhum deslocamento vertical).
+        */
+        transform: translateY(0);
+        /*
+        * Define a opacidade final como 1 (totalmente opaco).
+        */
+        opacity: 1;
+    }
+}
+
+/*
+* Estilos para o elemento <nav> (geralmente usado para navegação).
+*/
+nav {
+    /*
+    * Ativa o Flexbox para organizar os itens filhos (logo e links de navegação).
+    */
+    display: flex;
+    /*
+    * Distribui o espaço entre os itens flex. 'space-between' coloca o primeiro item no início,
+    * o último no fim, e distribui o espaço restante igualmente entre eles.
+    */
+    justify-content: space-between;
+    /*
+    * Alinha os itens flex verticalmente no centro.
+    */
+    align-items: center;
+    /*
+    * Define a largura máxima do contêiner da navegação para 1200px.
+    * Isso evita que o conteúdo se estenda muito em telas largas.
+    */
+    max-width: 1200px;
+    /*
+    * Centraliza o contêiner da navegação horizontalmente dentro do seu pai.
+    * `0` para margem superior/inferior, `auto` para margem esquerda/direita.
+    */
+    margin: 0 auto;
+}
+
+/*
+* Estilos para a classe '.logo'.
+*/
+.logo {
+    /*
+    * Define o tamanho da fonte.
+    */
+    font-size: 1.8rem;
+    /*
+    * Define a espessura da fonte como negrito.
+    */
+    font-weight: bold;
+    /*
+    * Define a cor do texto como branco.
+    */
+    color: rgb(106, 10, 93);
+    /*
+    * Remove o sublinhado padrão dos links.
+    */
+    text-decoration: none;
+    /*
+    * Aplica uma animação chamada 'glow' com duração de 2 segundos,
+    * função de temporização 'ease-in-out' (acelera, desacelera),
+    * infinita (repete continuamente) e alternada (inverte a direção a cada ciclo).
+    */
+    animation: brilho 2s ease-in-out infinite alternate;
+}
+
+/*
+* Define a animação 'glow' para o efeito de brilho do logo.
+*/
+@keyframes brilho {
+    /*
+    * Estado inicial da animação (0%).
+    */
+    from {
+        /*
+        * Adiciona uma sombra ao texto. Os valores são:
+        * deslocamento-x, deslocamento-y, raio do blur, cor.
+        * Cria um brilho sutil.
+        */
+        text-shadow: 0 0 5px rgba(253, 162, 247, 0.5);
+    }
+
+    /*
+    * Estado final da animação (100%).
+    */
+    to {
+        /*
+        * Aumenta o brilho e adiciona uma segunda sombra para um efeito mais intenso.
+        */
+        text-shadow: 0 0 30px #d369bc, 0 0 40px rgba(27, 2, 2, 1.0);
+    }
+}
+
+/*
+* Estilos para a lista de links de navegação.
+*/
+.nav-links {
+    /*
+    * Ativa o Flexbox para organizar os itens da lista horizontalmente.
+    */
+    display: flex;
+    /*
+    * Remove os marcadores de lista (bolinhas ou números).
+    */
+    list-style: none;
+    /*
+    * Define o espaçamento entre os itens flex. '2rem' (32px) entre cada link.
+    */
+    gap: 2rem;
+}
+
+/*
+* Estilos para os links dentro da lista de navegação.
+*/
+.nav-links a {
+    /*
+    * Define a cor do texto como branco.
+    */
+    color: rgb(82, 18, 77);
+    /*
+    * Remove o sublinhado padrão dos links.
+    */
+    text-decoration: none;
+    /*
+    * Define a espessura da fonte.
+    */
+    font-weight: 500;
+    /*
+    * Aplica uma transição suave a todas as propriedades CSS que mudarem
+    * em 0.3 segundos com uma função de temporização 'ease' (início e fim lentos).
+    */
+    transition: all 0.3s ease;
+    /*
+    * Define a posição relativa para que os pseudo-elementos (como '::before')
+    * possam ser posicionados em relação a este elemento.
+    */
+    position: relative;
+    /*
+    * Adiciona preenchimento interno aos links para aumentar a área clicável.
+    */
+    padding: 0.5rem 1rem;
+}
+
+/*
+* Estilos para o pseudo-elemento '::before' de cada link de navegação.
+* Pseudo-elementos são usados para estilizar partes específicas de um elemento.
+* Neste caso, será uma linha que aparece abaixo do link no hover.
+*/
+.nav-links a::before {
+    /*
+    * O conteúdo é obrigatório para pseudo-elementos, mas aqui está vazio pois
+    * ele será apenas uma linha visual.
+    */
+    content: '';
+    /*
+    * Posiciona o pseudo-elemento de forma absoluta em relação ao seu pai (.nav-links a).
+    */
+    position: absolute;
+    /*
+    * Anexa a linha à parte inferior do link.
+    */
+    bottom: 0;
+    /*
+    * Define a posição inicial da linha no centro horizontal do link.
+    */
+    left: 50%;
+    /*
+    * Define a largura inicial da linha como 0, ou seja, ela está invisível.
+    */
+    width: 0;
+    /*
+    * Define a altura da linha.
+    */
+    height: 2px;
+    /*
+    * Define a cor da linha como branca.
+    */
+    background: #160312;
+    /*
+    * Aplica uma transição suave à largura da linha.
+    */
+    transition: all 0.3s ease;
+    /*
+    * Move a linha para a esquerda em 50% da sua própria largura,
+    * centralizando-a perfeitamente em relação ao `left: 50%`.
+    */
+    transform: translateX(-50%);
+}
+
+/*
+* Estilos aplicados ao pseudo-elemento '::before' quando o mouse passa sobre o link.
+*/
+.nav-links a:hover::before {
+    /*
+    * Aumenta a largura da linha para 100%, fazendo-a aparecer.
+    */
+    width: 100%;
+}
+
+/*
+* Estilos aplicados ao link quando o mouse passa sobre ele.
+*/
+.nav-links a:hover {
+    /*
+    * Move o link ligeiramente para cima em 2 pixels, criando um efeito de "levantar".
+    */
+    transform: translateY(-2px);
+}
+
+/* --- */
+
+/* Seção principal */
+/*
+* Estilos para a seção principal da página, geralmente chamada de "hero section"
+* ou "banner principal".
+*/
+.hero {
+    /*
+    * Garante que esta seção ocupe 100% da altura da viewport.
+    */
+    height: 100vh;
+    /*
+    * Ativa o Flexbox para centralizar o conteúdo verticalmente e horizontalmente.
+    */
+    display: flex;
+    /*
+    * Alinha os itens verticalmente no centro.
+    */
+    align-items: center;
+    /*
+    * Alinha os itens horizontalmente no centro.
+    */
+    justify-content: center;
+    /*
+    * Centraliza o texto dentro da seção.
+    */
+    text-align: center;
+    /*
+    * Define a cor do texto como branco.
+    */
+    color: rgb(89, 24, 77);
+    /*
+    * Define a posição como relativa para permitir o posicionamento absoluto de elementos filhos,
+    * como as partículas.
+    */
+    position: relative;
+}
+
+/*
+* Estilos para o conteúdo dentro da seção hero.
+*/
+.hero-content {
+    /*
+    * Define a largura máxima do conteúdo para 800px.
+    */
+    max-width: 800px;
+    /*
+    * Adiciona preenchimento interno.
+    */
+    padding: 2rem;
+    /*
+    * Aplica a animação 'fadeInUp' com 1 segundo de duração, 'ease-out' de temporização,
+    * um atraso de 0.5 segundos e 'both' para que a animação mantenha seu estado final.
+    */
+    animation: fadeInUp 1s ease-out 0.5s both;
+}
+
+/*
+* Define a animação 'fadeInUp', que faz um elemento surgir de baixo para cima.
+*/
+@keyframes fadeInUp {
+    /*
+    * Estado inicial: transparente e deslocado 50px para baixo.
+    */
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    /*
+    * Estado final: totalmente opaco e na posição original.
+    */
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/*
+* Estilos para o título <h1> dentro da seção hero.
+*/
+.hero h1 {
+    /*
+    * Define o tamanho da fonte.
+    */
+    font-size: 3.2rem;
+    /*
+    * Adiciona uma margem inferior.
+    */
+    margin-bottom: 1rem;
+    /*
+    * Aplica um gradiente de fundo ao texto.
+    */
+    background: linear-gradient(45deg, #9657a4, rgb(89, 24, 77));
+    /*
+    * 'webkit-background-clip: text' recorta o fundo para que ele seja visível apenas
+    * através do texto (propriedade específica para navegadores baseados em WebKit).
+    */
+    -webkit-background-clip: text;
+    /*
+    * 'webkit-text-fill-color: transparent' torna a cor do texto transparente,
+    * permitindo que o gradiente de fundo apareça.
+    */
+    -webkit-text-fill-color: transparent;
+    /*
+    * Versão padrão da propriedade 'background-clip' (para outros navegadores).
+    */
+    background-clip: text;
+    /*
+    * Aplica a animação 'textShine' com 3 segundos de duração,
+    * 'ease-in-out', infinita.
+    */
+    animation: textShine 3s ease-in-out infinite;
+   
+}
+
+/*
+* Define a animação 'textShine' para o título.
+* Essa animação move a posição do gradiente de fundo, criando um efeito de brilho.
+*/
+@keyframes textShine {
+    /*
+    * Nos 0% e 100% da animação, a posição do gradiente é a mesma.
+    */
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    /*
+    * Na metade da animação (50%), a posição do gradiente é deslocada.
+    */
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/*
+* Estilos para o parágrafo <p> dentro da seção hero.
+*/
+.hero p {
+    /*
+    * Define o tamanho da fonte.
+    */
+    font-size: 1.2rem;
+    /*
+    * Adiciona uma margem inferior.
+    */
+    margin-bottom: 2rem;
+    /*
+    * Define a opacidade para um leve desbotamento.
+    */
+    opacity: 0.9;
+    /*
+    * Aplica a animação 'fadeInUp' com um atraso ligeiramente maior que o título,
+    * criando um efeito de cascata.
+    */
+    animation: fadeInUp 1s ease-out 0.8s both;
+}
+
+/*
+* Estilos para o botão de "call to action" (CTA).
+*/
+.cta-button {
+    /*
+    * Define o elemento como inline-block para que ele possa ter largura e altura,
+    * e também permitir que outros elementos fiquem na mesma linha.
+    */
+    display: inline-block;
+    /*
+    * Adiciona preenchimento interno.
+    */
+    padding: 1rem 2rem;
+    /*
+    * Aplica um gradiente de fundo.
+    */
+    background: linear-gradient(45deg, #9657a4, rgb(160, 40, 138));
+    /*
+    * Define a cor do texto como branco.
+    */
+    color: rgb(77, 17, 67);
+    /*
+    * Remove o sublinhado padrão dos links.
+    */
+    text-decoration: none;
+    /*
+    * Arredonda as bordas do botão para criar um formato de pílula.
+    */
+    border-radius: 50px;
+    /*
+    * Define a espessura da fonte como negrito.
+    */
+    font-weight: bold;
+    /*
+    * Define o tamanho da fonte.
+    */
+    font-size: 1.1rem;
+    /*
+    * Aplica uma transição suave a todas as propriedades.
+    */
+    transition: all 0.3s ease;
+    /*
+    * Adiciona uma sombra ao botão para dar profundidade.
+    */
+    box-shadow: 0 4px 15px #d369bc
+    * Aplica a animação 'fadeInUp' com um atraso maior, fazendo-o aparecer por último.
+    */
+    animation: fadeInUp 1s ease-out 1.1s both;
+}
+
+/*
+* Estilos aplicados ao botão CTA quando o mouse passa sobre ele.
+*/
+.cta-button:hover {
+    /*
+    * Move o botão ligeiramente para cima e o escala um pouco,
+    * dando um efeito de "zoom e levantar".
+    */
+    transform: translateY(-3px) scale(1.05);
+    /*
+    * Aumenta a intensidade da sombra, reforçando o efeito de destaque.
+    */
+    box-shadow: 0 8px 25px rgba(106, 16, 94, 0.8);
+}
+
+/* --- */
+
+/* Seção de recursos */
+/*
+* Estilos para a seção de "features" (recursos/benefícios).
+*/
+.features {
+    /*
+    * Adiciona preenchimento interno superior/inferior (5rem = 80px)
+    * e lateral (2rem = 32px).
+    */
+    padding: 5rem 2rem;
+    /*
+    * Define um fundo quase branco com 95% de opacidade.
+    */
+    background: rgba(255, 169, 242, 0.95);
+    /*
+    * Define a cor do texto como um cinza escuro.
+    */
+    color: #5d204c;
+}
+
+/*
+* Estilos para o contêiner genérico, usado para centralizar e limitar a largura do conteúdo.
+*/
+.container {
+    /*
+    * Define a largura máxima do contêiner.
+    */
+    max-width: 1200px;
+    /*
+    * Centraliza o contêiner horizontalmente.
+    */
+    margin: 0 auto;
+}
+
+/*
+* Estilos para o título <h2> dentro da seção de recursos.
+*/
+.features h2 {
+    /*
+    * Centraliza o texto horizontalmente.
+    */
+    text-align: center;
+    /*
+    * Define o tamanho da fonte.
+    */
+    font-size: 2.5rem;
+    /*
+    * Adiciona uma margem inferior.
+    */
+    margin-bottom: 3rem;
+    /*
+    * Define a cor do texto.
+    */
+    color: #421d3a;
+    /*
+    * Aplica a animação 'fadeInUp' (para o título aparecer suavemente).
+    */
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/*
+* Estilos para a grade de recursos (uma grade onde cada item é um 'feature-card').
+*/
+.features-grid {
+    /*
+    * Ativa o CSS Grid para organizar os itens em uma grade.
+    */
+    display: grid;
+    /*
+    * Define as colunas da grade. 'repeat(auto-fit, minmax(300px, 1fr))' cria colunas
+    * que se ajustam automaticamente. Cada coluna terá no mínimo 300px e no máximo 1 fração do espaço disponível.
+    * Isso garante que os cartões se adaptem bem a diferentes tamanhos de tela.
+    */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /*
+    * Define o espaçamento entre as células da grade (linhas e colunas).
+    */
+    gap: 2rem;
+    /*
+    * Adiciona uma margem superior.
+    */
+    margin-top: 3rem;
+}
+
+/*
+* Estilos para cada cartão de recurso individual.
+*/
+.feature-card {
+    /*
+    * Define o fundo do cartão como branco.
+    */
+    background: rgb(249, 143, 231);
+    /*
+    * Adiciona preenchimento interno.
+    */
+    padding: 2rem;
+    /*
+    * Arredonda as bordas do cartão.
+    */
+    border-radius: 15px;
+    /*
+    * Adiciona uma sombra ao cartão.
+    */
+    box-shadow: 0 10px 30px rgba(233, 124, 220, 0.1);
+    /*
+    * Centraliza o texto dentro do cartão.
+    */
+    text-align: left;
+    /*
+    * Aplica uma transição suave a todas as propriedades para efeitos de hover.
+    */
+    transition: all 0.3s ease;
+    /*
+    * Aplica a animação 'fadeInUp' para o cartão aparecer suavemente.
+    */
+    animation: fadeInUp 0.8s ease-out;
+    /*
+    * Define a posição relativa para permitir o posicionamento do pseudo-elemento.
+    */
+    position: relative;
+    /*
+    * Esconde qualquer conteúdo que transborde do cartão.
+    * Essencial para o efeito de "brilho" do pseudo-elemento.
+    */
+    overflow: hidden;
+}
+
+/*
+* Estilos para o pseudo-elemento '::before' de cada cartão de recurso.
+* Este será um efeito de brilho que passa sobre o cartão no hover.
+*/
+.feature-card::before {
+    /*
+    * Conteúdo vazio (apenas para fins visuais).
+    */
+    content: '';
+    /*
+    * Posiciona o pseudo-elemento de forma absoluta em relação ao cartão.
+    */
+    position: absolute;
+    /*
+    * Anexa ao topo.
+    */
+    top: 0;
+    /*
+    * Começa fora da tela à esquerda, -100% da sua própria largura.
+    */
+    left: -100%;
+    /*
+    * Ocupa 100% da largura do cartão.
+    */
+    width: 100%;
+    /*
+    * Ocupa 100% da altura do cartão.
+    */
+    height: 100%;
+    /*
+    * Aplica um gradiente linear semi-transparente para criar o efeito de brilho.
+    * 'transparent' nas bordas e 'rgba(102, 126, 234, 0.1)' no centro.
+    */
+    background: linear-gradient(90deg, transparent, rgba(234, 102, 205, 0.1), transparent);
+    /*
+    * Aplica uma transição suave à propriedade 'left'.
+    */
+    transition: left 0.5s ease;
+}
+
+/*
+* Estilos aplicados ao pseudo-elemento '::before' quando o mouse passa sobre o cartão.
+*/
+.feature-card:hover::before {
+    /*
+    * Move o pseudo-elemento da esquerda para a direita, 100% da largura,
+    * criando o efeito de brilho passando.
+    */
+    left: 100%;
+}
+
+/*
+* Estilos aplicados ao cartão quando o mouse passa sobre ele.
+*/
+.feature-card:hover {
+    /*
+    * Move o cartão ligeiramente para cima.
+    */
+    transform: translateY(-10px);
+    /*
+    * Aumenta a intensidade da sombra.
+    */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/*
+* Estilos para o ícone de cada recurso.
+*/
+.feature-icon {
+    /*
+    * Define a largura e altura do ícone, criando um quadrado.
+    */
+    width: 80px;
+    height: 80px;
+    /*
+    * Aplica um gradiente de fundo ao ícone.
+    */
+    background: linear-gradient(45deg, #ea66dd, #764ba2);
+    /*
+    * Arredonda as bordas para criar um círculo.
+    */
+    border-radius: 50%;
+    /*
+    * Ativa o Flexbox para centralizar o conteúdo do ícone (o próprio ícone)
+    * dentro do círculo.
+    */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*
+    * Centraliza o ícone horizontalmente e adiciona uma margem inferior.
+    */
+    margin: 0 auto 1rem;
+    /*
+    * Define o tamanho da fonte do ícone.
+    */
+    font-size: 2rem;
+    /*
+    * Define a cor do ícone como branco.
+    */
+    color: white;
+    /*
+    * Aplica uma animação de rotação com 4 segundos de duração, linear (velocidade constante),
+    * infinita.
+    */
+    animation: rotate 4s linear infinite;
+}
+
+/*
+* Define a animação 'rotate' para o ícone.
+*/
+@keyframes rotate {
+    /*
+    * Estado inicial: nenhuma rotação.
+    */
+    from {
+        transform: rotate(0deg);
+    }
+
+    /*
+    * Estado final: rotação completa de 360 graus.
+    */
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/*
+* Estilos aplicados ao ícone do recurso quando o mouse passa sobre o cartão pai.
+* Isso acelera a rotação do ícone no hover.
+*/
+.feature-card:hover .feature-icon {
+    /*
+    * Reduz a duração da animação para 0.5 segundos, fazendo o ícone girar mais rápido.
+    */
+    animation-duration: 0.5s;
+}
+
+/* --- */
+
+/* Partículas flutuantes */
+/*
+* Estilos para o contêiner das partículas, que cobrirá toda a área da seção.
+*/
+.particles {
+    /*
+    * Posiciona o contêiner de forma absoluta em relação ao seu pai (.hero).
+    */
+    position: absolute;
+    /*
+    * Ocupa toda a largura e altura do pai.
+    */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /*
+    * Impede que as partículas interceptem eventos do mouse,
+    * permitindo que o usuário interaja com o conteúdo por baixo delas.
+    */
+    pointer-events: none;
+    /*
+    * Esconde qualquer partícula que saia dos limites do contêiner.
+    */
+    overflow: hidden;
+}
+
+/*
+* Estilos para cada partícula individual.
+*/
+.particle {
+    /*
+    * Posiciona a partícula de forma absoluta em relação ao seu contêiner (.particles).
+    */
+    position: absolute;
+    /*
+    * Define o tamanho da partícula (um pequeno quadrado).
+    */
+    width: 4px;
+    height: 4px;
+    /*
+    * Define a cor da partícula como branca e semi-transparente.
+    */
+    background: rgba(1, 1, 1, 0.5);
+    /*
+    * Arredonda as bordas para criar um círculo (uma "bolinha").
+    */
+    border-radius: 50%;
+    /*
+    * Aplica uma animação de flutuação com 6 segundos de duração, linear, infinita.
+    */
+    animation: float 6s linear infinite;
+}
+
+/*
+* Define a animação 'float' para as partículas.
+* Elas "flutuam" de baixo para cima, desaparecendo no topo e reaparecendo embaixo.
+*/
+@keyframes float {
+    /*
+    * Estado inicial: começa na parte inferior da tela, rotacionada e transparente.
+    */
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+
+    /*
+    * As partículas aparecem.
+    */
+    10% {
+        opacity: 1;
+    }
+
+    /*
+    * As partículas permanecem visíveis durante a maior parte do percurso.
+    */
+    90% {
+        opacity: 1;
+    }
+
+    /*
+    * Estado final: sobe para fora da tela, rotacionada e transparente.
+    */
+    100% {
+        transform: translateY(-10vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/*
+* Aplica atrasos diferentes para cada partícula, fazendo com que apareçam
+* em momentos diferentes e em posições horizontais distintas,
+* criando um efeito mais natural e contínuo.
+*/
+.particle:nth-child(1) {
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.particle:nth-child(2) {
+    left: 20%;
+    animation-delay: 1s;
+}
+
+.particle:nth-child(3) {
+    left: 30%;
+    animation-delay: 2s;
+}
+
+.particle:nth-child(4) {
+    left: 40%;
+    animation-delay: 3s;
+}
+
+.particle:nth-child(5) {
+    left: 50%;
+    animation-delay: 4s;
+}
+
+.particle:nth-child(6) {
+    left: 60%;
+    animation-delay: 5s;
+}
+
+.particle:nth-child(7) {
+    left: 70%;
+    animation-delay: 2.5s; /* Atraso diferente para variar */
+}
+
+.particle:nth-child(8) {
+    left: 80%;
+    animation-delay: 1.5s; /* Atraso diferente para variar */
+}
+
+.particle:nth-child(9) {
+    left: 90%;
+    animation-delay: 3.5s; /* Atraso diferente para variar */
+}
+
+/* --- */
+
+/* Footer */
+/*
+* Estilos para o rodapé da página.
+*/
+footer {
+    /*
+    * Define a cor de fundo.
+    */
+    background: #d369bc;
+    /*
+    * Define a cor do texto como branco.
+    */
+    color: rgb(49, 12, 46);
+    /*
+    * Centraliza o texto.
+    */
+    text-align: center;
+    /*
+    * Adiciona preenchimento interno.
+    */
+    padding: 2rem;
+}
+
+/* --- */
+
+/* Responsividade */
+/*
+* Mídia query para aplicar estilos específicos quando a largura da tela
+* for menor ou igual a 768px (típico para tablets e celulares).
+*/
+@media (max-width: 768px) {
+    /*
+    * Esconde os links de navegação em telas menores,
+    * geralmente para serem substituídos por um "menu hambúrguer" em JavaScript.
+    */
+    .nav-links {
+        display: none;
+    }
+
+    /*
+    * Reduz o tamanho do título principal em telas menores.
+    */
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    /*
+    * Reduz o tamanho do parágrafo principal em telas menores.
+    */
+    .hero p {
+        font-size: 1rem;
+    }
+
+    /*
+    * Em telas menores, a grade de recursos se torna uma única coluna.
+    * '1fr' significa que a coluna ocupará 1 fração do espaço disponível.
+    */
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- */
+
+/* Animação de carregamento da página */
+/*
+* Define uma animação simples de fade-in para a página inteira.
+*/
+@keyframes pageLoad {
+    /*
+    * Inicia totalmente transparente.
+    */
+    from {
+        opacity: 0;
+    }
+
+    /*
+    * Termina totalmente opaco.
+    */
+    to {
+        opacity: 1;
+    }
+}
+
+/*
+* Aplica a animação 'pageLoad' ao elemento <body> quando a página é carregada.
+* '0.5s' é a duração e 'ease-in' faz com que a animação comece lentamente e acelere.
+*/
+body {
+    animation: pageLoad 0.5s ease-in;
+}

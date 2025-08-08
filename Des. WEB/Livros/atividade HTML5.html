@@ -1,0 +1,221 @@
+<!DOCTYPE html><html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing Page Avançada</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!DOCTYPE html>
+<html lang="pt-BR">
+    <body style="background-image: url(' https://estaticos-cdn.prensaiberica.es/clip/d5a464ff-e265-49ff-96d2-41286d033007_source-aspect-ratio_default_0.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    
+      </body>
+    
+<head>
+  <meta charset="UTF-8">
+  <title>Imagem de Fundo</title>
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+  <h1>Minha página com fundo</h1>
+</body>
+</html>
+  <style>
+    :root {
+      --primary: #3b0e2e;
+      --dark: #ececec;
+      --light: #91297f;
+    }* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--light);
+  color: var(--dark);
+  scroll-behavior: smooth;
+}
+
+header {
+  background-color: var(--primary);
+  padding: 1rem 2rem;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: rgb(211, 211, 211);
+}
+
+nav a {
+  margin-left: 2rem;
+  color: rgb(218, 216, 217);
+  text-decoration: none;
+  position: relative;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: rgb(56, 11, 33);
+  transition: width 0.3s;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+.hero {
+  height: 100vh;
+  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://source.unsplash.com/1600x900/?tech') no-repeat center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: rgb(46, 6, 26);
+  padding-top: 4rem;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  animation: fadeInDown 1.5s ease-out;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+section {
+  padding: 4rem 2rem;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.features article {
+  background: rgb(44, 4, 19);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.features article::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: var(--primary);
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  border: 1px solid #3f1033;
+  border-radius: 8px;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.btn {
+  background: var(--primary);
+  color: rgb(56, 7, 41);
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 8px;
+  transition: background 0.3s;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #f8e8f5;
+}
+
+footer {
+  background: #fff5f5;
+  color: rgb(255, 237, 251);
+  padding: 2rem;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">Flores.</div>
+      <div class="menu">
+        <a href="#sobre">Sobre</a>
+        <a href="#recursos">Recursos Essenciais</a>
+        <a href="#contato">Contato</a>
+      </div>
+    </nav>
+  </header>  <section class="hero">
+    <h1>Bem-vindo ao Jardim Encantado.</h1>
+    
+  </section>  <section id="sobre">
+    <h2> Jardim Encantado.</h2>
+    <p>A Floricultura Jardim Encantado é um espaço mágico que transforma sentimentos em flores.
+    Especializada em arranjos florais personalizados, buquês, cestas especiais e decoração para eventos, a loja oferece opções encantadoras para todas as ocasiões.
+    Também conta com uma seleção de plantas ornamentais e vasos decorativos, além de um serviço de entrega rápido e seguro. 
+    Com atenção aos detalhes e mensagens personalizadas, a Jardim Encantado é o lugar ideal para presentear com carinho e bom gosto.
+    </p>
+  </section>  <section id="recursos">
+    <h2>Recursos</h2>
+    <div class="features">
+      <article>
+        <h3><i class="fas fa-mobile-alt"></i> Floricultura Jardim Encantado</h3>
+        <p>Rua das Acácias, 237 - Bairro Primavera
+          Florália, SP - CEP 12345-678.</p>
+      </article>
+      <article>
+        <h3><i class="fas fa-lock"></i> Telefone</h3>
+        <p> (11) 3456-7890</p>
+      </article>
+      <article>
+        <h3><i class="fas fa-rocket"></i>📧 Email </h3>
+        <p> contato@jardimdossonhos.com.br</p>
+      </article>
+    </div>
+  </section>  <section id="contato">
+    <h2>Contato</h2>
+    <form class="contact-form">
+      <input type="text" placeholder="Seu nome" required>
+      <input type="email" placeholder="Seu e-mail" required>
+      <textarea rows="4" placeholder="Sua mensagem..."></textarea>
+      <button type="submit" class="btn">Enviar</button>
+     
+    </form>
+ 
+</body>
+</html>
