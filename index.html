@@ -1,28 +1,89 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Botões Estilizados</title>
+    <title>Meu Portfólio Criativo</title>
     <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
-    <h1>04 Exemplos de Botões Estilizados com CSS</h1>
-    <h2>Botão com Gradiente- Mostra gradientes, 
-        sombras e efeitos de brilhos animado.
-    </h2>
-    <a class="btn-gradient" href="pagina2.html"> Ir para página 2</a>
-     <h2>Botão Neon - Efeito Neon com borda colorida
-        e glow ao passar o mouse.
-    </h2>
-    <a class="btn-neon" href="pagina2.html"> Ir para página 2</a>
-     <h2>Botão 3D - efeito tridimensiona que simula um botão físico 
-        sendo pressionado.
-    </h2>
-    <a class="btn-3D" href="pagina2.html"> Ir para página 2</a>
-     <h2>Botão fantasma - É elegante e minimalista,
-        exibindo apenas o contorno até ser hoverado. 
-    </h2>
-    <a class="btn-ghost" href="pagina2.html"> Ir para página 2</a>
+    <header>
+        <div class="container">
+            <div class="profile-photo">
+                <img src="ft.imagem.jpeg" alt="Foto de Perfil">
+            </div>
+            <h1>Simplesmente, Amanda</h1>
+            <p>Projetando o Futuro</p>
+            <nav>
+                <ul>
+                    <li><a href="#sobre">Sobre Mim</a></li>
+                    <li><a href="#habilidades">Habilidades</a></li>
+                    <li><a href="#projetos">Projetos</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="sobre" class="container">
+            <h2>Sobre Mim</h2>
+            <p>Olá! Meu nome é Amanda Hoefling, e eu sou uma pessoa que ama ler, dançar e me divertir com amigos . Eu adoro viajar, viver coisas novas e cuidar de crianças. Neste portfólio, você vai encontrar um pouco sobre quem eu sou e o que eu consigo criar.</p>
+            <p>Minha jornada em pedagogia começou quando Quando eu tinha 16 anos, muita gente da minha idade pensava em fazer medicina, direito, engenharia… Eu também pensei  em seguir nessa área de medicina. Mas no fundo, tinha algo que sempre me chamava atenção: o cuidado com os pequenos. Desde então, tenho me dedicado a pesquisar sobre a profissão, conversei com uma professora que era minha prima e trabalhava em creche, foi quando percebi: educar na primeira infância não é "cuidar de criança apenas" — é formar o alicerce da vida toda..</p>
+        </section>
+
+        <section id="habilidades" class="container">
+            <h2>Minhas Habilidades</h2>
+            <div class="habilidades-lista">
+                <div class="habilidade-item">
+                    <h3>Observação Atenta e Educação Personalizada</h3>
+                    <p>capacidade de observar e interpretar o desenvolvimento individual das crianças, para adaptar as práticas educativas às necessidades e ritmos de aprendizagem de cada uma.</p>
+                </div>
+                <div class="habilidade-item">
+                    <h3>Comunicação</h3>
+                    <p>Consigo expressar minhas ideias de forma clara e eficaz, conversando com as pessoas.</p>
+                </div>
+                <div class="habilidade-item">
+                    <h3>Resolução de Problemas</h3>
+                    <p>Gosto de analisar situações e encontrar caminhos para superar obstáculos.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projetos" class="container">
+            <h2>Meus Projetos</h2>
+            <div class="projetos-grid">
+                <div class="projeto-item">
+                    <h3>Mundo das Sensações</h3>
+                    <p>Projeto que estimula o desenvolvimento sensorial de crianças de 1 a 3 anos por meio de experiências lúdicas com texturas, sons, cores, cheiros e sabores, promovendo a aprendizagem através da exploração e do afeto.</p>
+                    <a href="#">Ver Projeto</a>
+                </div>
+                <div class="projeto-item">
+                    <h3>Descobrindo com os Sentidos</h3>
+                    <p>Projeto que promove a coordenação motora e a percepção corporal em crianças pequenas por meio de atividades lúdicas que incentivam o movimento, a autonomia e a socialização das crianças.</p>
+                    <a href="#">Ver Detalhes</a>
+                </div>
+                <div class="projeto-item">
+                    <h3>Pequenos Sentidos, Grandes Descobertas</h3>
+                    <p>Enfrentei o desafio do projeto começando com materiais simples e seguros, respeitando o ritmo de cada criança e usando músicas e brincadeiras para incentivá-las aos poucos; com paciência e afeto.</p>
+                    <a href="#">Saiba Mais</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato" class="container">
+            <h2>Entre em Contato</h2>
+            <p>Comprometida em transformar cada desafio em aprendizado, acredito que a educação é a base para formar cidadãos conscientes, criativos e preparados para construir um futuro melhor.</p>
+            <p>Email: <a href="mailto:seu.email@exemplo.com">Amanda@gmail.com</a></p>
+            <p>Rede Social: <a href="https://twitter.com/seuperfil" target="_blank">@AmandaHC</a> 
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Amanda Hoefling. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 </body>
 </html>
