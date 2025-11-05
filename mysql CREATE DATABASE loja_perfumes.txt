@@ -1,0 +1,88 @@
+mysql> CREATE DATABASE loja_perfumes;
+
+
+mysql> USE loja_perfumes;
+mysql> CREATE TABLE Marca (id_marca INT AUTO_INCREMENT PRIMARY KEY,  nome_marca VARCHAR(100) NOT NULL);
+
+mysql> CREATE TABLE Perfume (id_perfume INT AUTO_INCREMENT PRIMARY KEY,  nome_perfume VARCHAR(100) NOT NULL,  id_marca INT,  preco DECIMAL(10,2) NOT NULL, estoque INT DEFAULT 0, descricao TEXT,FOREIGN KEY (id_marca) REFERENCES marca(id_marca));
+
+mysql> CREATE TABLE Cliente ( id_cliente INT AUTO_INCREMENT PRIMARY KEY, nome VARCHAR(100) NOT NULL, email VARCHAR(100) UNIQUE NOT NULL,  telefone VARCHAR(20));
+
+mysql> CREATE TABLE Pedido (id_pedido INT AUTO_INCREMENT PRIMARY KEY, id_cliente INT,data_pedido DATETIME DEFAULT CURRENT_TIMESTAMP, total DECIMAL(10,2),FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente));
+
+mysql> CREATE TABLE item_pedido (id_item INT AUTO_INCREMENT PRIMARY KEY, id_pedido INT,id_perfume INT,quantidade INT NOT NULL, subtotal DECIMAL(10,2), FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido),
+ FOREIGN KEY (id_perfume) REFERENCES perfume(id_perfume));
+
+mysql> INSERT INTO Marca (nome_marca) VALUES ('Dior'),('Chanel'),('Armani'),('Calvin Klein'),('Lancôme');
+
+mysql> INSERT INTO Perfume (nome_perfume, id_marca, preco, estoque, descricao) VALUES ('Perfume Floratta', 1, 599.90, 20, 'Perfume amadeirado fresco'),('Perfume Coffe', 1, 749.90, 15, 'Perfume feminino floral frutado'),('Perfume Nour', 2, 699.90, 10, 'Perfume feminino sofisticado'),('Perfume Mallbec', 3, 489.90, 25, 'Perfume masculino aquático'),('Perfume Elixir', 4, 459.90, 30, 'Perfume masculino moderno e envolvente'),('Perfume Elixir The Icon', 5, 799.90, 12, 'Perfume feminino doce e elegante');
+
+mysql> INSERT INTO Cliente (nome, email, telefone) VALUES ('Ana Souza', 'ana.souza@email.com','11987654321'),('Lucas Lima', 'lucas.lima@email.com','21999887766'),('Beatriz Rocha', 'bia.rocha@email.com','31988776655'),('Carlos Mendes', 'carlos.mendes@email.com','41977665544'),('Fernanda Dias', 'fernanda.dias@email.com','51966554433');
+
+mysql> INSERT INTO Pedido (id_cliente, total) VALUES (1, 1349.80),(2, 459.90),(3, 699.90),(4, 1289.80),(5, 799.90);
+
+mysql> INSERT INTO item_pedido (id_pedido, id_perfume,quantidade, subtotal) VALUES (1, 1, 1, 599.90),(1, 2, 1, 749.90),(2, 5, 1, 459.90),(3, 3, 1, 699.90),(4, 1, 1, 599.90),(4, 4, 1, 489.90),(4, 5, 1, 199.00), (5, 6, 1, 799.90);
+
+mysql> show tables;
++-------------------------+
+| Tables_in_loja_perfumes |
++-------------------------+
+| cliente                 |
+| item_pedido             |
+| marca                   |
+| pedido                  |
+| perfume                 |
++-------------------------+
+
+
+mysql> DESCRIBE Cliente;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id_cliente | int          | NO   | PRI | NULL    | auto_increment |
+| nome       | varchar(100) | NO   |     | NULL    |                |
+| email      | varchar(100) | NO   | UNI | NULL    |                |
+| telefone   | varchar(20)  | YES  |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+
+
+mysql>  DESCRIBE Perfume;
++--------------+---------------+------+-----+---------+----------------+
+| Field        | Type          | Null | Key | Default | Extra          |
++--------------+---------------+------+-----+---------+----------------+
+| id_perfume   | int           | NO   | PRI | NULL    | auto_increment |
+| nome_perfume | varchar(100)  | NO   |     | NULL    |                |
+| id_marca     | int           | YES  | MUL | NULL    |                |
+| preco        | decimal(10,2) | NO   |     | NULL    |                |
+| estoque      | int           | YES  |     | 0       |                |
+| descricao    | text          | YES  |     | NULL    |                |
++--------------+---------------+------+-----+---------+----------------+
+
+mysql>  DESCRIBE Marca;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id_marca   | int          | NO   | PRI | NULL    | auto_increment |
+| nome_marca | varchar(100) | NO   |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+
+mysql>  DESCRIBE Pedido;
++-------------+---------------+------+-----+-------------------+-------------------+
+| Field       | Type          | Null | Key | Default           | Extra             |
++-------------+---------------+------+-----+-------------------+-------------------+
+| id_pedido   | int           | NO   | PRI | NULL              | auto_increment    |
+| id_cliente  | int           | YES  | MUL | NULL              |                   |
+| data_pedido | datetime      | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+| total       | decimal(10,2) | YES  |     | NULL              |                   |
++-------------+---------------+------+-----+-------------------+-------------------+
+
+mysql>  DESCRIBE item_pedido;
++------------+---------------+------+-----+---------+----------------+
+| Field      | Type          | Null | Key | Default | Extra          |
++------------+---------------+------+-----+---------+----------------+
+| id_item    | int           | NO   | PRI | NULL    | auto_increment |
+| id_pedido  | int           | YES  | MUL | NULL    |                |
+| id_perfume | int           | YES  | MUL | NULL    |                |
+| quantidade | int           | NO   |     | NULL    |                |
+| subtotal   | decimal(10,2) | YES  |     | NULL    |                |
++------------+---------------+------+-----+---------+----------------+
